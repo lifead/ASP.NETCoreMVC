@@ -9,6 +9,10 @@ namespace WebStore.Controlers
     {
         public IActionResult Index()
         {
+            return View();
+        }
+        public IActionResult Employees()
+        {
             List<EmployeeView> employees = VirtualDB.GetEmployees();
             return View(employees);
         }
@@ -17,6 +21,11 @@ namespace WebStore.Controlers
         {
             EmployeeView employee = VirtualDB.GetEmployee(employeeId);
             return View(employee);
+        }
+
+        public IActionResult SomeAction()
+        {
+            return View();
         }
     }
 }
