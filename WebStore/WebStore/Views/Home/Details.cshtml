@@ -1,11 +1,5 @@
 ﻿@model WebStore.Models.EmployeeView
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Details</title>
-</head>
-<body>
+<div class="container">
     @if (!(Model is null))
     {
         <h3>Id:@Model.EmployeeId | @Model.FIO |</h3>
@@ -24,6 +18,5 @@
         <h3>Сотрудник не найден.</h3>
     }
     <br />
-    <h4><a href="~/Home">Вернуться к общему списку сотрудников</a></h4>
-</body>
-</html>
+    <h4><a asp-controller="Home" asp-action="Employees">Вернуться к общему списку сотрудников</a></h4>
+</div>

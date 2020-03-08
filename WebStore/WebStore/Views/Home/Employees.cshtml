@@ -1,33 +1,27 @@
-﻿@model List<WebStore.Models.EmployeeView>
+﻿@model IEnumerable<WebStore.Models.EmployeeView>
 @using WebStore.Models
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <table border="1">
+<div class="container">
+    <table  class="table table-bordered table-striped"  >
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Фамилия Имя Отчество</th>
                 <th>Возраст</th>
                 <th></th>
+
             </tr>
         </thead>
         <tbody>
             @foreach (EmployeeView item in Model)
             {
-                <tr>
-                    <td>@item.EmployeeId</td>
-                    <td>@item.FIO</td>
-                    <td>@item.Age</td>
-                    <td><a href="~/Home/Details?employeeId=@item.EmployeeId">Подробнее</a></td>
-                </tr>
+            <tr>
+                <td>@item.EmployeeId</td>
+                <td>@item.FIO</td>
+                <td>@item.Age</td>
+                <td><a  asp-controller="Home" asp-action="Details" asp-route-employeeId="@item.EmployeeId">Карточка</a></td>
+            </tr>
             }
         </tbody>
     </table>
-</body>
-</html>
+</div>
