@@ -7,15 +7,9 @@ namespace WebStore.Controlers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public IActionResult Employees()
-        {
-            List<EmployeeView> employees = VirtualDB.GetEmployees();
-            return View(employees);
-        }
+        public IActionResult Index() => View();
+
+        public IActionResult Employees() => View(VirtualDB.GetEmployees());
 
         public IActionResult Details(int employeeId)
         {
@@ -23,9 +17,19 @@ namespace WebStore.Controlers
             return View(employee);
         }
 
-        public IActionResult SomeAction()
-        {
-            return View();
-        }
+        public IActionResult SomeAction() => View();
+
+
+
+        public IActionResult Error404() => View();
+        public IActionResult Blog() => View();
+        public IActionResult BlogSingle() => View();
+        public IActionResult Cart() => View();
+        public IActionResult CheckOut() => View();
+        public IActionResult ContactUs() => View();
+        public IActionResult Login() => View();
+        public IActionResult Shop() => View();
+        public IActionResult ProductDetails() => View();
+
     }
 }
