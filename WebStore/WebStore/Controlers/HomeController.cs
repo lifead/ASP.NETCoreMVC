@@ -9,17 +9,7 @@ namespace WebStore.Controlers
     {
         public IActionResult Index() => View();
 
-        public IActionResult Employees() => View(VirtualDB.GetEmployees());
-
-        public IActionResult Details(int employeeId)
-        {
-            EmployeeView employee = VirtualDB.GetEmployee(employeeId);
-            return View(employee);
-        }
-
         public IActionResult SomeAction() => View();
-
-
 
         public IActionResult Error404() => View();
         public IActionResult Blog() => View();
