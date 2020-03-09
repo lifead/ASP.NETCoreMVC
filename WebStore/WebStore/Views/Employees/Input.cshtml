@@ -1,0 +1,84 @@
+﻿@model WebStore.Models.EmployeeView
+
+@{
+    ViewData["Title"] = "Редактирование карточки сотрудника";
+}
+
+
+@*
+    =======================================================
+
+          Создано с помощью генератора исходного кода VS
+
+    =======================================================
+*@
+
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Input" method="post">
+                @if (Model.EmployeeId != 0)
+                {
+                    <div class="form-group">
+                        <label asp-for="EmployeeId" class="control-label"></label>
+                        <input asp-for="EmployeeId" class="form-control" />
+                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                    </div>
+                }
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="SurName" class="control-label"></label>
+                    <input asp-for="SurName" class="form-control" />
+                    <span asp-validation-for="SurName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Patronymic" class="control-label"></label>
+                    <input asp-for="Patronymic" class="form-control" />
+                    <span asp-validation-for="Patronymic" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Age" class="control-label"></label>
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Department" class="control-label"></label>
+                    <input asp-for="Department" class="form-control" />
+                    <span asp-validation-for="Department" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDay" class="control-label"></label>
+                    <input asp-for="BirthDay" class="form-control" />
+                    <span asp-validation-for="BirthDay" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DateOfEmployment" class="control-label"></label>
+                    <input asp-for="DateOfEmployment" class="form-control" />
+                    <span asp-validation-for="DateOfEmployment" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FIO" class="control-label"></label>
+                    <input asp-for="FIO" class="form-control" />
+                    <span asp-validation-for="FIO" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <h4><a asp-controller="Employees" asp-action="Index">Вернуться к общему списку сотрудников</a></h4>
+    </div>
+</div>

@@ -14,7 +14,8 @@
                 <th>Фамилия Имя Отчество</th>
                 <th>Возраст</th>
                 <th></th>
-
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,6 +26,8 @@
                     <td>@item.FIO</td>
                     <td>@item.Age</td>
                     <td><a asp-controller="Employees" asp-action="Details" asp-route-employeeId="@item.EmployeeId">Карточка</a></td>
+                    <td><a asp-controller="Employees" asp-action="Input" asp-route-employeeId="@item.EmployeeId">Редактировать</a></td>
+                    <td><a asp-controller="Employees" asp-action="Delete" asp-route-employeeId="@item.EmployeeId">Удалить</a></td>
                 </tr>
             }
         </tbody>
