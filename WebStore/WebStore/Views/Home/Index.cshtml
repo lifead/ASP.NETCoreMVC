@@ -1,33 +1,22 @@
-﻿@model List<WebStore.Models.EmployeeView>
-@using WebStore.Models
+﻿<partial name="Partial/_Slider" />
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Фамилия Имя Отчество</th>
-                <th>Возраст</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (EmployeeView item in Model)
-            {
-                <tr>
-                    <td>@item.EmployeeId</td>
-                    <td>@item.FIO</td>
-                    <td>@item.Age</td>
-                    <td><a href="~/Home/Details?employeeId=@item.EmployeeId">Подробнее</a></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
-</html>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+
+                <partial name="Partial/_LeftSideBar" />
+
+            </div>
+
+            <div class="col-sm-9 padding-right">
+
+                <partial name="Partial/_FeaturesItems" />
+                <partial name="Partial/_CategoryTab" />
+                <partial name="Partial/_RecommendedItems" />
+
+            </div>
+        </div>
+    </div>
+</section>
+

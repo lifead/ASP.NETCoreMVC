@@ -19,9 +19,6 @@ namespace WebStore.Services
                 ,new EmployeeView(){ EmployeeId = 4, Age = 32, Department="Отдел № 3", Email="snf@example.com", SurName = "Сонина ", FirstName = "Надежда", Patronymic = "Феликсовна"   ,BirthDay = new DateTime(2000,05,05), DateOfEmployment = new DateTime(2020,02,09)}
             });
         }
-        /*
-        Дополнительная информация может быть любой, дополняющей основную: дату рождения, возраст, дата устройства на работу и т.д.         *
-        */
 
 
         /// <summary>
@@ -32,6 +29,21 @@ namespace WebStore.Services
         {
             return employees;
         }
+
+
+        /// <summary>
+        /// Удаление сотрудника из базы данных по Id
+        /// </summary>
+        /// <param name="employeeId"></param>
+        internal static void Delete(int employeeId)
+        {
+            var _empl = employees.FirstOrDefault(x => x.EmployeeId == employeeId);
+            if (_empl != null)
+            {
+                employees.Remove(_empl);
+            }
+        }
+
 
         /// <summary>
         /// Получить одного сотрудника по employeeId
@@ -44,6 +56,33 @@ namespace WebStore.Services
             return result;
         }
 
+
+        /// <summary>
+        /// Обновление данных о сотруднике
+        /// </summary>
+        /// <param name="employee"></param>
+        static public void Update(EmployeeView employee)
+        {
+            if (employee == null)
+                return;
+            else if (employee.EmployeeId == 0)
+            {
+                int index = employees.Max(x => x.EmployeeId);
+                employee.EmployeeId = ++index;
+                employees.Add(employee);
+            }
+            else
+            {
+                var _empl = employees.FirstOrDefault(x => x.EmployeeId == employee.EmployeeId);
+                if (_empl is null)
+                    employees.Add(employee);
+                else
+                {
+                    int index = employees.IndexOf(_empl);
+                    employees[index] = employee;
+                }
+            }
+        }
 
     }
 }
