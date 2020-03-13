@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebStore.Models;
 using WebStore.Services;
+using WebStore.ViewModels;
 
 namespace WebStore.Controlers
 {
@@ -20,7 +21,7 @@ namespace WebStore.Controlers
         /// <returns></returns>
         public IActionResult Details(int employeeId)
         {
-            EmployeeView employee = VirtualDB.GetEmployee(employeeId);
+            EmployeeViewModel employee = VirtualDB.GetEmployee(employeeId);
             return View(employee);
         }
 
@@ -33,12 +34,12 @@ namespace WebStore.Controlers
         [HttpGet]
         public IActionResult Input(int employeeId)
         {
-            EmployeeView employee;
+            EmployeeViewModel employee;
 
             if (employeeId != 0)
                 employee = VirtualDB.GetEmployee(employeeId);
             else
-                employee = new EmployeeView();
+                employee = new EmployeeViewModel();
 
             return View(employee);
         }
@@ -49,10 +50,10 @@ namespace WebStore.Controlers
         /// <param name="employee"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Input(EmployeeView employee)
+        public IActionResult Input(EmployeeViewModel employee)
         {
             if (employee == null)
-                employee = new EmployeeView();
+                employee = new EmployeeViewModel();
             else
             {
                 VirtualDB.Update(employee);

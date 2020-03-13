@@ -1,33 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WebStore.Data;
 using WebStore.Models;
+using WebStore.ViewModels;
+using WebStore.Services.Mappers;
 
 namespace WebStore.Services
 {
 
     public class VirtualDB
     {
-        private static readonly List<EmployeeView> employees = new List<EmployeeView>();
-
-        static VirtualDB()
-        {
-            employees.AddRange(new[] {
-                 new EmployeeView(){ EmployeeId = 1, Age = 23, Department="Отдел № 1", Email="ges@example.com", SurName = "Гусев", FirstName = "Ефрем", Patronymic = "Степановна"       ,BirthDay = new DateTime(2000,01,21), DateOfEmployment = new DateTime(2020,03,01)}
-                ,new EmployeeView(){ EmployeeId = 2, Age = 34, Department="Отдел № 1", Email="akp@example.com", SurName = "Акимова ", FirstName = "Кристина ", Patronymic = "Петрович"  ,BirthDay = new DateTime(2000,04,14), DateOfEmployment = new DateTime(2020,03,02)}
-                ,new EmployeeView(){ EmployeeId = 3, Age = 45, Department="Отдел № 2", Email="jvd@example.com", SurName = "Жгулёв", FirstName = "Владилен", Patronymic = "Дмитриевич"   ,BirthDay = new DateTime(2000,02,27), DateOfEmployment = new DateTime(2020,02,04)}
-                ,new EmployeeView(){ EmployeeId = 4, Age = 32, Department="Отдел № 3", Email="snf@example.com", SurName = "Сонина ", FirstName = "Надежда", Patronymic = "Феликсовна"   ,BirthDay = new DateTime(2000,05,05), DateOfEmployment = new DateTime(2020,02,09)}
-            });
-        }
+        private static readonly List<Employee> employees = TestData.Employees;
 
 
         /// <summary>
         /// Получить всех сотрудников
         /// </summary>
         /// <returns></returns>
-        static public List<EmployeeView> GetEmployees()
+        static public List<EmployeeViewModel> GetEmployees()
         {
-            return employees;
+            return employees.Select(x=>x.ToViewModel()).ToList();
         }
 
 
@@ -37,7 +30,7 @@ namespace WebStore.Services
         /// <param name="employeeId"></param>
         internal static void Delete(int employeeId)
         {
-            var _empl = employees.FirstOrDefault(x => x.EmployeeId == employeeId);
+            var _empl = employees.FirstOrDefault(x => x.Id == employeeId);
             if (_empl != null)
             {
                 employees.Remove(_empl);
@@ -50,9 +43,9 @@ namespace WebStore.Services
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        static public EmployeeView GetEmployee(int employeeId)
+        static public EmployeeViewModel GetEmployee(int employeeId)
         {
-            var result = employees.FirstOrDefault(x => x.EmployeeId == employeeId);
+            var result = employees.FirstOrDefault(x => x.Id == employeeId).ToViewModel();
             return result;
         }
 
@@ -60,26 +53,30 @@ namespace WebStore.Services
         /// <summary>
         /// Обновление данных о сотруднике
         /// </summary>
-        /// <param name="employee"></param>
-        static public void Update(EmployeeView employee)
+        /// <param name="_employee"></param>
+        static public void Update(EmployeeViewModel employee)
         {
+
             if (employee == null)
                 return;
-            else if (employee.EmployeeId == 0)
+
+            var _employee = employee.ToDataModel();
+
+            if (_employee.Id == 0)
             {
-                int index = employees.Max(x => x.EmployeeId);
-                employee.EmployeeId = ++index;
-                employees.Add(employee);
+                int index = employees.Max(x => x.Id);
+                _employee.Id = ++index;
+                employees.Add(_employee);
             }
             else
             {
-                var _empl = employees.FirstOrDefault(x => x.EmployeeId == employee.EmployeeId);
+                var _empl = employees.FirstOrDefault(x => x.Id == _employee.Id);
                 if (_empl is null)
-                    employees.Add(employee);
+                    employees.Add(_employee);
                 else
                 {
                     int index = employees.IndexOf(_empl);
-                    employees[index] = employee;
+                    employees[index] = _employee;
                 }
             }
         }

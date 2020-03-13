@@ -1,6 +1,6 @@
-﻿@model WebStore.Models.EmployeeView
+﻿@model EmployeeViewModel
 @{
-    ViewData["Title"] = $"Карточка сотрудника № {Model.EmployeeId}";
+    ViewData["Title"] = $"Карточка сотрудника № {Model.Id}";
 }
 
 
@@ -8,7 +8,7 @@
     <h3>@ViewData["Title"]</h3>
     @if (!(Model is null))
     {
-        <h3>Id:@Model.EmployeeId | @Model.FIO |</h3>
+        <h3>Id:@Model.Id | @Model.FIO |</h3>
         <h5>Дата рождения: @Model.BirthDay.ToShortDateString()</h5>
         <dl>
             <dt>Email:</dt>
