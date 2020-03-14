@@ -61,7 +61,9 @@ namespace WebStore.ViewModels
         /// <summary>
         /// Полное ФИО
         /// </summary>
-        [DisplayName("Полное ФИО")]
-        public string FIO => $"{SecondName} {Name} {Patronymic}";
+        public override string ToString()
+        {
+            return $"{SecondName} {Name} {Patronymic}";
+        }
     }
 }

@@ -1,17 +1,35 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 using WebStore.Services;
 using WebStore.ViewModels;
+
 
 namespace WebStore.Controlers
 {
     public class EmployeesController : Controller
     {
         /// <summary>
+        /// Объект с данными
+        /// </summary>
+        private readonly IEmployeesData _employeesData;
+
+        public EmployeesController(IEmployeesData employeesData) => _employeesData = employeesData;
+
+        /// <summary>
         /// Отображение списка сотрудников
         /// </summary>
         /// <returns></returns>
-        public IActionResult Index() => View(VirtualDB.GetEmployees());
+        public IActionResult Index() => View(_employeesData.GetAll().Select(e => new EmployeeViewModel
+        {
+            Id = e.Id,
+            Name = e.FirstName,
+            SecondName = e.SurName,
+            Patronymic = e.Patronymic,
+            Age = e.Age
+        }));
 
 
         /// <summary>
@@ -19,10 +37,20 @@ namespace WebStore.Controlers
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        public IActionResult Details(int employeeId)
+        public IActionResult Details(int Id)
         {
-            EmployeeViewModel employee = VirtualDB.GetEmployee(employeeId);
-            return View(employee);
+            var employee = _employeesData.GetById(Id);
+            if (employee is null)
+                return NotFound();
+
+            return View(new EmployeeViewModel
+            {
+                Id = employee.Id,
+                Name = employee.FirstName,
+                SecondName = employee.SurName,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age
+            });
         }
 
 
@@ -32,16 +60,25 @@ namespace WebStore.Controlers
         /// <param name="employeeId"></param>
         /// <returns></returns>
         [HttpGet]
-        public IActionResult Input(int employeeId)
+        public IActionResult Input(int? id)
         {
-            EmployeeViewModel employee;
+            if (id is null) return View(new EmployeeViewModel());
 
-            if (employeeId != 0)
-                employee = VirtualDB.GetEmployee(employeeId);
-            else
-                employee = new EmployeeViewModel();
+            if (id < 0)
+                return BadRequest();
 
-            return View(employee);
+            var employee = _employeesData.GetById((int)id);
+            if (employee is null)
+                return NotFound();
+
+            return View(new EmployeeViewModel
+            {
+                Id = employee.Id,
+                Name = employee.FirstName,
+                SecondName = employee.SurName,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age
+            });
         }
 
         /// <summary>
@@ -52,14 +89,69 @@ namespace WebStore.Controlers
         [HttpPost]
         public IActionResult Input(EmployeeViewModel employee)
         {
-            if (employee == null)
-                employee = new EmployeeViewModel();
-            else
-            {
-                VirtualDB.Update(employee);
-            }
+            if (employee is null)
+                throw new ArgumentNullException(nameof(employee));
 
-            return View(employee);
+            if (!ModelState.IsValid)
+                return View(employee);
+
+            var id = employee.Id;
+            if (id == 0)
+                _employeesData.Add(new Employee
+                {
+                    FirstName = employee.Name,
+                    SurName = employee.SecondName,
+                    Patronymic = employee.Patronymic,
+                    Age = employee.Age
+                });
+            else
+                _employeesData.Edit(id, new Employee
+                {
+                    FirstName = employee.Name,
+                    SurName = employee.SecondName,
+                    Patronymic = employee.Patronymic,
+                    Age = employee.Age
+                });
+
+            _employeesData.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
+
+
+        /// <summary>
+        /// Create - Добавление пользователя с помощью метода Create
+        /// </summary>
+        /// <returns></returns>
+        public IActionResult Create()
+        {
+            return View(new EmployeeViewModel());
+        }
+
+        /// <summary>
+        /// Create - Сохранение в БД
+        /// </summary>
+        /// <param name="Employee"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult Create(EmployeeViewModel Employee)
+        {
+            if (Employee is null)
+                throw new ArgumentNullException(nameof(Employee));
+
+            if (!ModelState.IsValid)
+                return View(Employee);
+
+            _employeesData.Add(new Employee
+            {
+                FirstName = Employee.Name,
+                SurName = Employee.SecondName,
+                Patronymic = Employee.Patronymic,
+                Age = Employee.Age
+            });
+            _employeesData.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
 
@@ -68,11 +160,36 @@ namespace WebStore.Controlers
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
-        public IActionResult Delete(int employeeId)
+        public IActionResult Delete(int id)
         {
+            if (id <= 0) return BadRequest();
 
-            VirtualDB.Delete(employeeId);
-            return View("Index", VirtualDB.GetEmployees());
+            var employee = _employeesData.GetById(id);
+            if (employee is null)
+                return NotFound();
+
+            return View(new EmployeeViewModel
+            {
+                Id = employee.Id,
+                Name = employee.FirstName,
+                SecondName = employee.SurName,
+                Patronymic = employee.Patronymic,
+                Age = employee.Age
+            });
         }
+
+        /// <summary>
+        /// Удаление после подтверждения
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _employeesData.Delete(id);
+            _employeesData.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
     }
 }

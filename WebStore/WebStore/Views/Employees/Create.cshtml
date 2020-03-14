@@ -1,18 +1,16 @@
 ﻿@model EmployeeViewModel
 
 @{
-    ViewData["Title"] = "Редактирование карточки сотрудника";
+    ViewData["Title"] = "Сотрудник. Добавление информации о сотруднике";
 }
 
-
-
 <div class="container">
-    <h3>@ViewData["Title"]</h3>
+    <h4>Добавление информации о сотруднике</h4>
+    <hr />
     <form asp-action="Input" method="post">
         <div class="row">
             <div class="col-md-4">
                 <input asp-for="Id" type="hidden" />
-
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />
