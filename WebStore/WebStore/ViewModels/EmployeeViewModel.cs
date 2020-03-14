@@ -1,32 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebStore.Models
+namespace WebStore.ViewModels
 {
-    /// <summary>
-    /// Сотрудник
-    /// </summary>
-    public class EmployeeView
+    public class EmployeeViewModel
     {
         /// <summary>
         /// EmployeeId
         /// </summary>
-        public int EmployeeId { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// Имя
         /// </summary>
         [DisplayName("Имя")]
-        public string FirstName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Фамилия
         /// </summary>
         [DisplayName("Фамилия")]
-        public string SurName { get; set; }
+        public string SecondName { get; set; }
 
         /// <summary>
         /// Отчество
@@ -67,8 +61,9 @@ namespace WebStore.Models
         /// <summary>
         /// Полное ФИО
         /// </summary>
-        [DisplayName("Полное ФИО")]
-        public string FIO => $"{SurName} {FirstName} {Patronymic}";
-
+        public override string ToString()
+        {
+            return $"{SecondName} {Name} {Patronymic}";
+        }
     }
 }

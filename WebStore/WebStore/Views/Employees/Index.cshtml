@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EmployeeView>
+﻿@model IEnumerable<EmployeeViewModel>
 
 @{
     ViewData["Title"] = "Сотрудники";
@@ -7,6 +7,9 @@
 
 <div class="container">
     <h3>@ViewData["Title"]</h3>
+    <div>
+        <h4><a asp-controller="Employees" asp-action="Create">Добавить нового сотрудника</a></h4>
+    </div>
     <table class="table table-bordered table-striped" id="employees-table">
         <thead>
             <tr>
@@ -19,15 +22,15 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (EmployeeView item in Model)
+            @foreach (EmployeeViewModel item in Model)
             {
                 <tr>
-                    <td>@item.EmployeeId</td>
-                    <td>@item.FIO</td>
+                    <td>@item.Id</td>
+                    <td>@item.ToString()</td>
                     <td>@item.Age</td>
-                    <td><a asp-controller="Employees" asp-action="Details" asp-route-employeeId="@item.EmployeeId">Карточка</a></td>
-                    <td><a asp-controller="Employees" asp-action="Input" asp-route-employeeId="@item.EmployeeId">Редактировать</a></td>
-                    <td><a asp-controller="Employees" asp-action="Delete" asp-route-employeeId="@item.EmployeeId">Удалить</a></td>
+                    <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@item.Id">Карточка</a></td>
+                    <td><a asp-controller="Employees" asp-action="Input" asp-route-id="@item.Id">Редактировать</a></td>
+                    <td><a asp-controller="Employees" asp-action="Delete" asp-route-id="@item.Id">Удалить</a></td>
                 </tr>
             }
         </tbody>
