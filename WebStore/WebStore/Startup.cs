@@ -22,10 +22,9 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            //AddTransient - каждый раз будет создавать экземпляр сервиса
-            //AddScoped - один экземпляр сервиса на область вилимости
-            //AddSingleton -   один экзеспляр на все время жизни приложения
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            
+            //Добавление и регистрация сервисов данного приложения
+            services.AddWebStoreInterfaces();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
