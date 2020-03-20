@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
 
@@ -14,6 +14,6 @@ namespace WebStore.Domain.Entities
         /// <summary>
         /// Список товаров данного бренда
         /// </summary>
-        public virtual ICollection Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
