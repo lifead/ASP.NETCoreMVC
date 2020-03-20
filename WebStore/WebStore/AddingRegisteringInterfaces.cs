@@ -5,6 +5,7 @@ using WebStore.DAL.Context;
 using WebStore.Data;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services.InMemory;
+using WebStore.Infrastructure.Services.InSQL;
 
 namespace WebStore
 {
@@ -31,7 +32,8 @@ namespace WebStore
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
 
             //Регистрация для работы с перечнем секций, каталогов и фильтрами продуктов
-            services.AddSingleton<IProductData, InMemoryProductData>();
+            //services.AddSingleton<IProductData, InMemoryProductData>();
+            services.AddScoped<IProductData, SqlProductData>();
             
             services.AddTransient <WebStoreDBInitializer>();
 
