@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using WebStore.DAL.Context;
+using WebStore.Data;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services;
 
@@ -14,8 +18,11 @@ namespace WebStore
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection AddWebStoreInterfaces(this IServiceCollection services)
+        public static IServiceCollection AddWebStoreInterfaces(this IServiceCollection services, IConfiguration Configuration)
         {
+            services.AddDbContext<WebStoreDB>(opt =>
+                   opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             //AddTransient - каждый раз будет создавать экземпляр сервиса
             //AddScoped - один экземпляр сервиса на область вилимости
             //AddSingleton -   один экзеспляр на все время жизни приложения
@@ -25,6 +32,8 @@ namespace WebStore
 
             //Регистрация для работы с перечнем секций, каталогов и фильтрами продуктов
             services.AddSingleton<IProductData, InMemoryProductData>();
+            
+            services.AddTransient <WebStoreDBInitializer>();
 
             return services;
         }
