@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+п»їusing Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +21,7 @@ namespace WebStore
            
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             
-            //Добавление и регистрация сервисов данного приложения
+            //Р”РѕР±Р°РІР»РµРЅРёРµ Рё СЂРµРіРёСЃС‚СЂР°С†РёСЏ СЃРµСЂРІРёСЃРѕРІ РґР°РЅРЅРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ
             services.AddWebStoreInterfaces(Configuration);
         }
 
