@@ -7,7 +7,7 @@ using WebStore.Domain.Entities.Base.Interfaces;
 
 namespace WebStore.Services
 {
-    public class MyClass
+    public class ExampleMapping
     {
 
         static public T Mapp<T>(object Obj) where T : IBaseEntity, INamedEntity, IOrderedEntity, new()

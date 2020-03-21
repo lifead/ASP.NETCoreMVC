@@ -27,13 +27,8 @@ namespace WebStore.Components
         /// <returns>Перечень </returns>
         public IEnumerable<BrandViewModel> GetBrands() => _ProductData
            .GetBrands()
-           //.Select(brand => new BrandViewModel
-           // {
-           //     Id = brand.Id,
-           //     Name = brand.Name,
-           //     Order = brand.Order
-           // })
-           .Select(brand=>  MyClass.Mapp<BrandViewModel>(brand))
+
+           .Select(brand=>  ExampleMapping.Mapp<BrandViewModel>(brand))
            .OrderBy(brand => brand.Order);
     }
 }
