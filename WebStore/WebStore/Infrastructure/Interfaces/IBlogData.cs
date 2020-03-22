@@ -22,6 +22,6 @@ namespace WebStore.Infrastructure.Interfaces
         /// </summary>
         /// <param name="id">Идентификатор блога</param>
         /// <returns>Экземпляр блога</returns>
-        Blog GetById(int id);
+        Blog GetById(int? id);
     }
 }

@@ -20,7 +20,7 @@ namespace WebStore.Controlers
             return View(blogs);
         }
 
-        public IActionResult BlogSingle(int Id)
+        public IActionResult BlogSingle(int? Id)
         {
             var singleBlog = _BlogData.GetById(Id).ToView();
             return View(singleBlog);

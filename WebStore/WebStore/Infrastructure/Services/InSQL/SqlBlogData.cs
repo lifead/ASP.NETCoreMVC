@@ -25,11 +25,16 @@ namespace WebStore.Infrastructure.Services.InSQL
             .Include(x => x.BlogResponses)
             .AsEnumerable();
 
-        public Blog GetById(int Id) => _db.Blogs
-            .Include(x=>x.BlogComments)
-            .Include(x=>x.BlogRatings)
-            .Include(x=>x.BlogResponses)
-            .FirstOrDefault(x=>x.Id == Id);
-        
+        public Blog GetById(int? Id)
+        {
+            if (Id == null)
+                Id = _db.Blogs.Max(x => x.Id);
+
+            return _db.Blogs
+                .Include(x => x.BlogComments)
+                .Include(x => x.BlogRatings)
+                .Include(x => x.BlogResponses)
+                .FirstOrDefault(x => x.Id == Id);
+        }
     }
 }
