@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore.ViewModels.Identity;
 
 namespace WebStore.Controlers
 {
@@ -10,12 +11,12 @@ namespace WebStore.Controlers
     {
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterUserViewModel());
         }
 
         public IActionResult Login()
         {
-            return View();
+            return View(new LoginViewModel());
         }
 
 
