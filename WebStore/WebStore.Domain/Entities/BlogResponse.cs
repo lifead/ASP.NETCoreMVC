@@ -49,6 +49,11 @@ namespace WebStore.Domain.Entities
         public string Author { get; set; }
 
         /// <summary>
+        /// Ссылка на картинку
+        /// </summary>
+        public string ImageUrl { get; set; }
+
+        /// <summary>
         /// Рейтинг
         /// </summary>
         public string ResponseText { get; set; }

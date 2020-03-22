@@ -105,9 +105,9 @@ namespace WebStore.Data
 
         public static IEnumerable<BlogResponse> BlogResponses { get; } = new[]
         {
-            new BlogResponse {Id = 1,Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment},
-            new BlogResponse {Id = 2,Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = 1,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment},
-            new BlogResponse {Id = 3,Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment}
+            new BlogResponse {Id = 1, ImageUrl = "man-four.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment},
+            new BlogResponse {Id = 2, ImageUrl = "man-one.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = 1,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment},
+            new BlogResponse {Id = 3, ImageUrl = "man-three.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment}
         };
 
         public static IEnumerable<BlogRating> BlogRatings { get; } = new[]
