@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Blog;
 using WebStore.ViewModels.Blog;
 
 namespace WebStore.Infrastructure.Mapping.Blog

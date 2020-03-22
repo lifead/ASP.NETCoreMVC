@@ -3,6 +3,7 @@ using WebStore.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using WebStore.Domain.Entities.Blog;
 
 namespace WebStore.DAL.Context
 {

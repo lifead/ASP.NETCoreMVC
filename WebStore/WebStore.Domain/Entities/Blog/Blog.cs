@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.Domain.Entities
+namespace WebStore.Domain.Entities.Blog
 {
     /// <summary>
     /// Блог
@@ -32,9 +32,9 @@ namespace WebStore.Domain.Entities
         /// <summary>
         /// Содержание блока
         /// </summary>
-        [Column(TypeName ="text")]
+        [Column(TypeName = "text")]
         public string Text { get; set; }
-        
+
         /// <summary>
         /// Ссылка на картинку
         /// </summary>
