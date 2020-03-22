@@ -36,6 +36,12 @@ namespace WebStore.ViewModels.Blog
         public string Text { get; set; }
 
         /// <summary>
+        /// Адрес изображения товара
+        /// </summary>
+        public string ImageUrl { get; set; }
+
+
+        /// <summary>
         /// Список указанных оценок рейтинга
         /// </summary>
         public virtual IEnumerable<BlogRatingViewModel> BlogRatings { get; set; }

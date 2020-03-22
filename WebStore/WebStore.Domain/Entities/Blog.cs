@@ -34,6 +34,11 @@ namespace WebStore.Domain.Entities
         /// </summary>
         [Column(TypeName ="text")]
         public string Text { get; set; }
+        
+        /// <summary>
+        /// Ссылка на картинку
+        /// </summary>
+        public string ImageUrl { get; set; }
 
         /// <summary>
         /// Список указанных оценок рейтинга

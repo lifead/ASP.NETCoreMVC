@@ -16,6 +16,7 @@ namespace WebStore.Infrastructure.Mapping.Blog
             CreateDate = p.CreateDate,
             Order = p.Order,
             Text = p.Text,
+            ImageUrl = p.ImageUrl,
             Title = p.Title
         };
 

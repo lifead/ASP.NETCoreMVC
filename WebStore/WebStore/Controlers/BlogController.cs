@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Infrastructure.Interfaces;
+using WebStore.Infrastructure.Mapping.Blog;
 
 namespace WebStore.Controlers
 {
@@ -15,6 +16,11 @@ namespace WebStore.Controlers
 
         public IActionResult Index()
         {
+            var blogs = _BlogData.GetAll().Select(x => x.ToView()).ToList();
+            var oneBlog = _BlogData.GetById(1).ToView();
+
+
+
             return View();
         }
     }

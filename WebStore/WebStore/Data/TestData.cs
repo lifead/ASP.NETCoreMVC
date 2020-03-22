@@ -85,9 +85,9 @@ namespace WebStore.Data
 
         public static IEnumerable<Blog> Blogs { get; } = new[]
         {
-            new Blog{ Id = 1, Author = "Mac Doe", CreateDate = crDt, Title = name, Order = 1, Text = text},
-            new Blog{ Id = 2, Author = "Mac Doe", CreateDate = crDt, Title = name, Order = 1, Text = text},
-            new Blog{ Id = 3, Author = "Mac Doe", CreateDate = crDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 1, Author = "Mac Doe", ImageUrl = "blog-one.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 2, Author = "Mac Doe", ImageUrl = "blog-two.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 3, Author = "Mac Doe", ImageUrl = "blog-three.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
         };
 
         public static IEnumerable<BlogComment> BlogComments { get; } = new[]
