@@ -49,6 +49,11 @@ namespace WebStore.ViewModels.Blog
         public string Author { get; set; }
 
         /// <summary>
+        /// Адрес изображения отзыва
+        /// </summary>
+        public string ImageUrl { get; set; }
+
+        /// <summary>
         /// Рейтинг
         /// </summary>
         public string ResponseText { get; set; }

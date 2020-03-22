@@ -36,7 +36,7 @@ namespace WebStore.ViewModels.Blog
         public string Text { get; set; }
 
         /// <summary>
-        /// Адрес изображения товара
+        /// Адрес изображения блога
         /// </summary>
         public string ImageUrl { get; set; }
 

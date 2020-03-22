@@ -15,6 +15,7 @@ namespace WebStore.Infrastructure.Mapping.Blog
             BlogResponseId = p.BlogResponseId,
             Order = p.Order,
             ResponseText = p.ResponseText,
+            ImageUrl = p.ImageUrl
             //Blog = p.Blog.ToView(),
             //ParentBlogResponse = p.ParentBlogResponse.ToView()
         };
