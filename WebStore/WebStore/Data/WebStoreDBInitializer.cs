@@ -25,39 +25,57 @@ namespace WebStore.Data
 
             await db.MigrateAsync().ConfigureAwait(false);
 
-            if (await _db.Products.AnyAsync()) return;
-
-            using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+            //Настраиваем таблицы продуктов
+            if (!await _db.Products.AnyAsync())
             {
-                await _db.Sections.AddRangeAsync(TestData.Sections).ConfigureAwait(false);
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.Sections.AddRangeAsync(TestData.Sections).ConfigureAwait(false);
 
-                await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
-                await _db.SaveChangesAsync().ConfigureAwait(false);
-                await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
 
-                await transaction.CommitAsync().ConfigureAwait(false);
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
+
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.Brands.AddRangeAsync(TestData.Brands).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
+
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.Products.AddRangeAsync(TestData.Products).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
             }
 
-            using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+            //Настраиваем таблицы блогов
+            //Настраиваем таблицы продуктов
+            if (!await _db.Blogs.AnyAsync())
             {
-                await _db.Brands.AddRangeAsync(TestData.Brands).ConfigureAwait(false);
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.Blogs.AddRangeAsync(TestData.Blogs).ConfigureAwait(false);
 
-                await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
-                await _db.SaveChangesAsync().ConfigureAwait(false);
-                await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Blogs] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Blogs] OFF");
 
-                await transaction.CommitAsync().ConfigureAwait(false);
-            }
-
-            using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
-            {
-                await _db.Products.AddRangeAsync(TestData.Products).ConfigureAwait(false);
-
-                await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
-                await _db.SaveChangesAsync().ConfigureAwait(false);
-                await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
-
-                await transaction.CommitAsync().ConfigureAwait(false);
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
             }
         }
     }

@@ -74,6 +74,20 @@ namespace WebStore.Data
             new Product { Id = 11, Name = "Джинсы женские", Price = 1025, ImageUrl = "product11.jpg", Order = 10, SectionId = 25, BrandId = 3 },
             new Product { Id = 12, Name = "Летний костюм", Price = 1025, ImageUrl = "product12.jpg", Order = 11, SectionId = 25, BrandId = 3 },
         };
+
+
+        private static readonly DateTime ctDt = new DateTime(2020, 03, 21, 22, 39, 00);
+        private static readonly string name = "GIRLS PINK T SHIRT ARRIVED IN STORE";
+        private static readonly string text = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.";
+        
+        public static IEnumerable<Blog> Blogs { get; } = new[]
+        {
+            new Blog{ Id = 1, Author = "Mac Doe", CreateDate = ctDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 2, Author = "Mac Doe", CreateDate = ctDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 3, Author = "Mac Doe", CreateDate = ctDt, Title = name, Order = 1, Text = text},
+        };
+
+
     }
 };
 

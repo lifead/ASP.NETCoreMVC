@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebStore.DAL.Context;
 
 namespace WebStore.DAL.Migrations
 {
     [DbContext(typeof(WebStoreDB))]
-    partial class WebStoreDBModelSnapshot : ModelSnapshot
+    [Migration("20200322030235_Initial_v3")]
+    partial class Initial_v3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,8 +138,6 @@ namespace WebStore.DAL.Migrations
 
                     b.HasIndex("BlogId");
 
-                    b.HasIndex("BlogResponseId");
-
                     b.ToTable("BlogResponses");
                 });
 
@@ -241,10 +241,6 @@ namespace WebStore.DAL.Migrations
                     b.HasOne("WebStore.Domain.Entities.Blog", "Blog")
                         .WithMany()
                         .HasForeignKey("BlogId");
-
-                    b.HasOne("WebStore.Domain.Entities.BlogResponse", "ParentBlogResponse")
-                        .WithMany()
-                        .HasForeignKey("BlogResponseId");
                 });
 
             modelBuilder.Entity("WebStore.Domain.Entities.Product", b =>

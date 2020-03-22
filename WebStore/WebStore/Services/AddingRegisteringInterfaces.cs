@@ -34,6 +34,7 @@ namespace WebStore.Services
             //Регистрация для работы с перечнем секций, каталогов и фильтрами продуктов
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
+            services.AddScoped<IBlogData, SqlBlogData>();
 
             services.AddTransient<WebStoreDBInitializer>();
 
