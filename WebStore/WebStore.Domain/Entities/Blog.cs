@@ -46,9 +46,8 @@ namespace WebStore.Domain.Entities
         public virtual ICollection<BlogComment> BlogComments { get; set; }
 
         /// <summary>
-        ///// Список отзывов на блог
-        ///// </summary>
-        //[ForeignKey(nameof(Id))]
-        //public virtual ICollection<BlogResponse> BlogResponses { get; set; }
+        /// Список отзывов на блог
+        /// </summary>
+        public virtual ICollection<BlogResponse> BlogResponses { get; set; }
     }
 }

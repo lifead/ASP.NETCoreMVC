@@ -21,7 +21,11 @@ namespace WebStore.Infrastructure.Services.InSQL
 
         public IEnumerable<Blog> GetAll() => _db.Blogs.AsEnumerable();
 
-        public Blog GetById(int Id) => _db.Blogs.FirstOrDefault(x=>x.Id == Id);
+        public Blog GetById(int Id) => _db.Blogs
+            .Include(x=>x.BlogComments)
+            .Include(x=>x.BlogRatings)
+            .Include(x=>x.BlogResponses)
+            .FirstOrDefault(x=>x.Id == Id);
         
     }
 }
