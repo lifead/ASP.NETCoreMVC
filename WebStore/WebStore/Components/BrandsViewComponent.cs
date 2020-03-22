@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Infrastructure.Interfaces;
+using WebStore.Services;
 using WebStore.ViewModels;
 
 namespace WebStore.Components
@@ -13,6 +14,7 @@ namespace WebStore.Components
     /// </summary>
     public class BrandsViewComponent : ViewComponent
     {
+
         private readonly IProductData _ProductData;
 
         public BrandsViewComponent(IProductData ProductData) => _ProductData = ProductData;
@@ -25,12 +27,8 @@ namespace WebStore.Components
         /// <returns>Перечень </returns>
         public IEnumerable<BrandViewModel> GetBrands() => _ProductData
            .GetBrands()
-           .Select(brand => new BrandViewModel
-            {
-                Id = brand.Id,
-                Name = brand.Name,
-                Order = brand.Order
-            })
+
+           .Select(brand=>  ExampleMapping.Mapp<BrandViewModel>(brand))
            .OrderBy(brand => brand.Order);
     }
 }

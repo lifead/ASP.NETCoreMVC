@@ -1,0 +1,23 @@
+﻿@model BlogViewModel
+<div class="single-blog-post">
+    <h3>@Model.Title</h3>
+    <div class="post-meta">
+        <ul>
+            <li><i class="fa fa-user"></i> @Model.Author</li>
+            <li><i class="fa fa-clock-o"></i> @Model.CreateDate.ToString("hh:mm")</li>
+            <li><i class="fa fa-calendar"></i> @Model.CreateDate.ToString("MMM dd, yyyy")</li>
+        </ul>
+        <span>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-o"></i>
+        </span>
+    </div>
+    <a href="">
+        <img src="/images/blog/@Model.ImageUrl" alt="@Model.ImageUrl">
+    </a>
+    <p>@Model.Text</p>
+    <a asp-controller="Blog" asp-action="BlogSingle" asp-route-id="@Model.Id" class="btn btn-primary">Подробнее</a>
+</div>
