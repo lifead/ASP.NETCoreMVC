@@ -76,6 +76,39 @@ namespace WebStore.Data
 
                     await transaction.CommitAsync().ConfigureAwait(false);
                 }
+
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.BlogRatings.AddRangeAsync(TestData.BlogRatings).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[BlogRatings] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[BlogRatings] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
+
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.BlogComments.AddRangeAsync(TestData.BlogComments).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[BlogComments] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[BlogComments] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
+
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.BlogResponses.AddRangeAsync(TestData.BlogResponses).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[BlogResponses] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[BlogResponses] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
             }
         }
     }
