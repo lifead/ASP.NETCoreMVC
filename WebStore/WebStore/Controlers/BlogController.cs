@@ -17,11 +17,13 @@ namespace WebStore.Controlers
         public IActionResult Index()
         {
             var blogs = _BlogData.GetAll().Select(x => x.ToView()).ToList();
-            var oneBlog = _BlogData.GetById(1).ToView();
+            return View(blogs);
+        }
 
-
-
-            return View();
+        public IActionResult BlogSingle(int Id)
+        {
+            var singleBlog = _BlogData.GetById(Id).ToView();
+            return View(singleBlog);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace WebStore.Infrastructure.Mapping.Blog
             CreateDate = p.CreateDate,
             Order = p.Order,
             UserId = p.UserId,
-            Blog = p.Blog.ToView()
+            //Blog = p.Blog.ToView()
         };
     }
 }

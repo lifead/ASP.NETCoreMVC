@@ -1,0 +1,16 @@
+﻿@model  BlogResponseViewModel
+
+<li class="@(Model.BlogResponseId == null? "media" : "media second-media")">
+    <a class="pull-left" href="#">
+        <img class="media-object" src="images/blog/man-two.jpg" alt="">
+    </a>
+    <div class="media-body">
+        <ul class="sinlge-post-meta">
+            <li><i class="fa fa-user"></i> @Model.Author</li>
+            <li><i class="fa fa-clock-o"></i> @Model.CreateDate.ToString("hh:mm")</li>
+            <li><i class="fa fa-calendar"></i> @Model.CreateDate.ToString("MMM dd, yyyy")</li>
+        </ul>
+        <p>@Model.ResponseText</p>
+        <a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
+    </div>
+</li>
