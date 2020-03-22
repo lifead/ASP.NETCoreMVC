@@ -19,7 +19,11 @@ namespace WebStore.Infrastructure.Services.InSQL
 
         public SqlBlogData(WebStoreDB db) => _db = db;
 
-        public IEnumerable<Blog> GetAll() => _db.Blogs.AsEnumerable();
+        public IEnumerable<Blog> GetAll() => _db.Blogs
+            .Include(x => x.BlogComments)
+            .Include(x => x.BlogRatings)
+            .Include(x => x.BlogResponses)
+            .AsEnumerable();
 
         public Blog GetById(int Id) => _db.Blogs
             .Include(x=>x.BlogComments)
