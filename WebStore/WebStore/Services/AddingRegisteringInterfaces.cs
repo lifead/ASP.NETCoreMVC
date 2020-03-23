@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using WebStore.DAL.Context;
 using WebStore.Data;
+using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services.InMemory;
 using WebStore.Infrastructure.Services.InSQL;
@@ -23,6 +26,42 @@ namespace WebStore.Services
         {
             services.AddDbContext<WebStoreDB>(opt =>
                    opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, Role>()
+               .AddEntityFrameworkStores<WebStoreDB>()
+               .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(x =>
+            {
+                x.Password.RequiredLength = 3;
+                x.Password.RequireDigit = false;
+                x.Password.RequireUppercase = false;
+                x.Password.RequireLowercase = true;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequiredUniqueChars = 3;
+
+                //opt.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCD...123457890";
+                x.User.RequireUniqueEmail = false;
+
+                x.Lockout.AllowedForNewUsers = true;
+                x.Lockout.MaxFailedAccessAttempts = 10;
+                x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+            });
+
+            services.ConfigureApplicationCookie(x =>
+            {
+                x.Cookie.Name = "WebStore";
+                x.Cookie.HttpOnly = true;
+                x.ExpireTimeSpan = TimeSpan.FromDays(10);
+
+                x.LoginPath = "/Account/Login";
+                x.LogoutPath = "/Account/Logout";
+                x.AccessDeniedPath = "/Account/AccessDenied";
+
+                x.SlidingExpiration = true;
+            });
+
+
 
             //AddTransient - каждый раз будет создавать экземпляр сервиса
             //AddScoped - один экземпляр сервиса на область вилимости

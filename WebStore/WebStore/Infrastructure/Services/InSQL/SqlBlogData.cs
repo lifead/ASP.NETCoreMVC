@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
-using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Blog;
 using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Infrastructure.Services.InSQL

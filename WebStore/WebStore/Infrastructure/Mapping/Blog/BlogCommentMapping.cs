@@ -1,4 +1,4 @@
-﻿using WebStore.Domain.Entities;
+﻿using WebStore.Domain.Entities.Blog;
 using WebStore.ViewModels.Blog;
 
 namespace WebStore.Infrastructure.Mapping.Blog

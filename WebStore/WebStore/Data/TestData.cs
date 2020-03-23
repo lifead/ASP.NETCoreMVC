@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using WebStore.Domain.Entities;
 using WebStore.Models;
-
+using WebStore.Domain.Entities.Blog;
 
 namespace WebStore.Data
 {

@@ -1,12 +1,11 @@
-﻿using WebStore.Domain.Entities;
-using WebStore.ViewModels.Blog;
+﻿using WebStore.ViewModels.Blog;
 using System.Linq;
 
 namespace WebStore.Infrastructure.Mapping.Blog
 {
     public static class BlogMapping
     {
-        public static BlogViewModel ToView(this Domain.Entities.Blog p)
+        public static BlogViewModel ToView(this Domain.Entities.Blog.Blog p)
         {
 
             return p == null ? null :
