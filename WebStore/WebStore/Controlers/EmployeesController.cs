@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Models;
 using WebStore.Services;
@@ -9,12 +11,14 @@ using WebStore.ViewModels;
 
 namespace WebStore.Controlers
 {
+    [Authorize]
     public class EmployeesController : Controller
     {
         /// <summary>
         /// Объект с данными
         /// </summary>
         private readonly IEmployeesData _employeesData;
+
 
         public EmployeesController(IEmployeesData employeesData) => _employeesData = employeesData;
 
@@ -60,6 +64,7 @@ namespace WebStore.Controlers
         /// <param name="employeeId"></param>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Input(int? id)
         {
             if (id is null) return View(new EmployeeViewModel());
@@ -86,7 +91,8 @@ namespace WebStore.Controlers
         /// </summary>
         /// <param name="employee"></param>
         /// <returns></returns>
-        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Input(EmployeeViewModel employee)
         {
             if (employee is null)
@@ -126,6 +132,7 @@ namespace WebStore.Controlers
         /// Create - Добавление пользователя с помощью метода Create
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Create()
         {
             return View(new EmployeeViewModel());
@@ -136,7 +143,8 @@ namespace WebStore.Controlers
         /// </summary>
         /// <param name="Employee"></param>
         /// <returns></returns>
-        [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Create(EmployeeViewModel Employee)
         {
             if (Employee is null)
@@ -163,6 +171,7 @@ namespace WebStore.Controlers
         /// </summary>
         /// <param name="employeeId"></param>
         /// <returns></returns>
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult Delete(int id)
         {
             if (id <= 0) return BadRequest();
@@ -187,6 +196,7 @@ namespace WebStore.Controlers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = Role.Administrator)]
         public IActionResult DeleteConfirmed(int id)
         {
             _employeesData.Delete(id);
