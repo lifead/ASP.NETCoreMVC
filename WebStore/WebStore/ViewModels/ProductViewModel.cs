@@ -20,5 +20,10 @@ namespace WebStore.ViewModels
         /// Цена товара
         /// </summary>
         public decimal Price { get; set; }
+
+        /// <summary>
+        /// Брэнд товара
+        /// </summary>
+        public string Brand { get; set; }
     }
 }
