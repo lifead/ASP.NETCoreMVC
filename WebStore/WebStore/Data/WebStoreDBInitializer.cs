@@ -1,69 +1,91 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
+using WebStore.Domain.Entities.Identity;
 
 namespace WebStore.Data
 {
     public class WebStoreDBInitializer
     {
         private readonly WebStoreDB _db;
+        private readonly UserManager<User> _UserManager;
+        private readonly RoleManager<Role> _RoleManager;
 
-        public WebStoreDBInitializer(WebStoreDB db) => _db = db;
+        public WebStoreDBInitializer(WebStoreDB db, UserManager<User> UserManager, RoleManager<Role> RoleManager)
+        {
+            _db = db;
+            _UserManager = UserManager;
+            _RoleManager = RoleManager;
+        }
 
         public void Initialize() => InitializeAsync().Wait();
 
         public async Task InitializeAsync()
         {
-            var db = _db.Database;
+            await _db.Database.MigrateAsync().ConfigureAwait(false);
 
-            //if (await db.EnsureDeletedAsync().ConfigureAwait(false))
-            //    if (!await db.EnsureCreatedAsync().ConfigureAwait(false))
-            //        throw new InvalidOperationException("Не удалось создать БД");
-
-            await db.MigrateAsync().ConfigureAwait(false);
+            //Настраиваем таблицы пользователей и ролей
+            await InitializeIdentityAsync().ConfigureAwait(false);
 
             //Настраиваем таблицы продуктов
-            if (!await _db.Products.AnyAsync())
+            await InitializeProductAsync().ConfigureAwait(false);
+
+            //Настраиваем таблицы блогов
+            await InitializeBlogAsync().ConfigureAwait(false);
+
+
+
+        }
+
+        #region InitializeIdentityAsync
+        /// <summary>
+        /// InitializeIdentityAsync - Добавление пользователей и ролей "по умолчнию"
+        /// </summary>
+        /// <returns></returns>
+        private async Task InitializeIdentityAsync()
+        {
+            if (!await _RoleManager.RoleExistsAsync(Role.Administrator))
+                await _RoleManager.CreateAsync(new Role { Name = Role.Administrator });
+
+            if (!await _RoleManager.RoleExistsAsync(Role.User))
+                await _RoleManager.CreateAsync(new Role { Name = Role.User });
+
+            if (await _UserManager.FindByNameAsync(User.Administrator) is null)
             {
-                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                var admin = new User
                 {
-                    await _db.Sections.AddRangeAsync(TestData.Sections).ConfigureAwait(false);
+                    UserName = User.Administrator,
+                    //Email = "amin@server.com"
+                };
 
-                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
-                    await _db.SaveChangesAsync().ConfigureAwait(false);
-                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
-
-                    await transaction.CommitAsync().ConfigureAwait(false);
-                }
-
-                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                var create_result = await _UserManager.CreateAsync(admin, User.AdminDefaultPassword);
+                if (create_result.Succeeded)
+                    await _UserManager.AddToRoleAsync(admin, Role.Administrator);
+                else
                 {
-                    await _db.Brands.AddRangeAsync(TestData.Brands).ConfigureAwait(false);
-
-                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
-                    await _db.SaveChangesAsync().ConfigureAwait(false);
-                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
-
-                    await transaction.CommitAsync().ConfigureAwait(false);
-                }
-
-                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
-                {
-                    await _db.Products.AddRangeAsync(TestData.Products).ConfigureAwait(false);
-
-                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
-                    await _db.SaveChangesAsync().ConfigureAwait(false);
-                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
-
-                    await transaction.CommitAsync().ConfigureAwait(false);
+                    var errors = create_result.Errors.Select(error => error.Description);
+                    throw new InvalidOperationException($"Ошибка при создании пользователя - Администратора: {string.Join(", ", errors)}");
                 }
             }
 
-            //Настраиваем таблицы блогов
-            //Настраиваем таблицы продуктов
+        } 
+        #endregion
+
+        #region InitializeBlogAsync - Добавление блогов "по умолчнию"
+        /// <summary>
+        /// InitializeBlogAsync - Добавление блогов "по умолчнию"
+        /// </summary>
+        /// <param name="db"></param>
+        /// <returns></returns>
+        private async Task InitializeBlogAsync()
+        {
+            var db = _db.Database;
+
             if (!await _db.Blogs.AnyAsync())
             {
                 using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
@@ -111,5 +133,54 @@ namespace WebStore.Data
                 }
             }
         }
+        #endregion
+
+        #region InitializeProductAsync - Добавление товаров "по умолчнию"
+        /// <summary>
+        /// InitializeProductAsync - Добавление товаров "по умолчнию"
+        /// </summary>
+        /// <returns></returns>
+        private async Task InitializeProductAsync()
+        {
+            var db = _db.Database;
+
+            //Настраиваем таблицы продуктов
+            if (!await _db.Products.AnyAsync())
+            {
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.Sections.AddRangeAsync(TestData.Sections).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Sections] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
+
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.Brands.AddRangeAsync(TestData.Brands).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Brands] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
+
+                using (var transaction = await db.BeginTransactionAsync().ConfigureAwait(false))
+                {
+                    await _db.Products.AddRangeAsync(TestData.Products).ConfigureAwait(false);
+
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] ON");
+                    await _db.SaveChangesAsync().ConfigureAwait(false);
+                    await db.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Products] OFF");
+
+                    await transaction.CommitAsync().ConfigureAwait(false);
+                }
+            }
+        }
+        #endregion
     }
 }
