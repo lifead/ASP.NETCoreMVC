@@ -8,7 +8,11 @@
 <div class="container">
     <h3>@ViewData["Title"]</h3>
     <div>
-        <h4><a asp-controller="Employees" asp-action="Create">Добавить нового сотрудника</a></h4>
+        @if (User.IsInRole(Role.Administrator))
+        {
+            <h4><a asp-controller="Employees" asp-action="Create" class="btn btn-success">Добавить нового сотрудника Create</a></h4>
+            <h4><a asp-controller="Employees" asp-action="Input" class="btn btn-success">Добавить нового сотрудника Input</a></h4>
+        }
     </div>
     <table class="table table-bordered table-striped" id="employees-table">
         <thead>
@@ -17,8 +21,11 @@
                 <th>Фамилия Имя Отчество</th>
                 <th>Возраст</th>
                 <th></th>
-                <th></th>
-                <th></th>
+                @if (User.IsInRole(Role.Administrator))
+                {
+                    <th></th>
+                    <th></th>
+                }
             </tr>
         </thead>
         <tbody>
@@ -29,8 +36,11 @@
                     <td>@item.ToString()</td>
                     <td>@item.Age</td>
                     <td><a asp-controller="Employees" asp-action="Details" asp-route-id="@item.Id">Карточка</a></td>
-                    <td><a asp-controller="Employees" asp-action="Input" asp-route-id="@item.Id">Редактировать</a></td>
-                    <td><a asp-controller="Employees" asp-action="Delete" asp-route-id="@item.Id">Удалить</a></td>
+                    @if (User.IsInRole(Role.Administrator))
+                    {
+                        <td><a asp-controller="Employees" asp-action="Input" asp-route-id="@item.Id">Редактировать</a></td>
+                        <td><a asp-controller="Employees" asp-action="Delete" asp-route-id="@item.Id">Удалить</a></td>
+                    }
                 </tr>
             }
         </tbody>

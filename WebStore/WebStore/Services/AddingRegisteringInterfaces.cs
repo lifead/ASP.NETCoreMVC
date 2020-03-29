@@ -9,6 +9,7 @@ using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure.Interfaces;
 using WebStore.Infrastructure.Services.InMemory;
 using WebStore.Infrastructure.Services.InSQL;
+using WebStore.Infrastructure.Services.InCookies;
 
 namespace WebStore.Services
 {
@@ -74,6 +75,7 @@ namespace WebStore.Services
             //services.AddSingleton<IProductData, InMemoryProductData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IBlogData, SqlBlogData>();
+            services.AddScoped<ICartService, CookiesCartService>();
 
             services.AddTransient<WebStoreDBInitializer>();
 

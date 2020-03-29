@@ -1,4 +1,6 @@
-﻿namespace WebStore.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace WebStore.Domain.Entities
 {
     /// <summary>
     /// Фильтр товаров (продуктов)
@@ -14,5 +16,12 @@
         /// Номер (идентификатор) искомого бренда
         /// </summary>
         public int? BrandId { get; set; }
+
+
+        /// <summary>
+        /// Список идентификаторов продуктов
+        /// </summary>
+        public List<int> Ids { get; set; }
+
     }
 }

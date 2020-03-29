@@ -42,9 +42,13 @@ namespace WebStore
             app.UseStaticFiles();
             app.UseDefaultFiles();
 
-            app.UseAuthentication();
+            
+
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
