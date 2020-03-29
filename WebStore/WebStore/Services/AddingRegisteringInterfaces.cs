@@ -76,6 +76,7 @@ namespace WebStore.Services
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IBlogData, SqlBlogData>();
             services.AddScoped<ICartService, CookiesCartService>();
+            services.AddScoped<IOrderService, SqlOrderService>();
 
             services.AddTransient<WebStoreDBInitializer>();
 
