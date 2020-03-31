@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Blog;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.Entities.Orders;
 
 namespace WebStore.DAL.Context
 {
@@ -15,6 +16,9 @@ namespace WebStore.DAL.Context
         public DbSet<BlogResponse> BlogResponses { get; set; }
         public DbSet<BlogComment> BlogComments { get; set; }
         public DbSet<BlogRating> BlogRatings { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+
 
         public WebStoreDB(DbContextOptions<WebStoreDB> Options)
             :base(Options)
