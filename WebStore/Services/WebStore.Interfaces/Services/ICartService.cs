@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore.Domain.ViewModels.Product;
+﻿using WebStore.Domain.ViewModels.Product;
 
 
-namespace WebStore.Infrastructure.Interfaces
+namespace WebStore.Interfaces.Services
 {
     /// <summary>
     /// Описание интерфейса корзины

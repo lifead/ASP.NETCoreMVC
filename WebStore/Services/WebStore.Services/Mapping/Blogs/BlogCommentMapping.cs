@@ -2,7 +2,7 @@
 using WebStore.Domain.ViewModels.Blog;
 
 
-namespace WebStore.Infrastructure.Mapping.Blog
+namespace WebStore.Services.Mapping.Blogs
 {
     public static class BlogCommentMapping
     {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.ViewModels.Product;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 using WebStore.Services;
 
 
@@ -29,7 +29,7 @@ namespace WebStore.Components
         public IEnumerable<BrandViewModel> GetBrands() => _ProductData
            .GetBrands()
 
-           .Select(brand=>  ExampleMapping.Mapp<BrandViewModel>(brand))
+           .Select(brand => ExampleMapping.Mapp<BrandViewModel>(brand))
            .OrderBy(brand => brand.Order);
     }
 }

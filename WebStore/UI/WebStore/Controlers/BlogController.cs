@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Infrastructure.Mapping.Blog;
+
+
+using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping.Blogs;
 
 namespace WebStore.Controlers
 {

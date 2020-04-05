@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore.Domain.Models;
+﻿using WebStore.Domain.Models;
 using WebStore.Domain.ViewModels.Product;
 
 
-namespace WebStore.Infrastructure.Mapping
+namespace WebStore.Services.Mapping.Products
 {
     public static class EmployeeMapping
     {

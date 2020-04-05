@@ -5,9 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Blog;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 
-namespace WebStore.Infrastructure.Services.InSQL
+namespace WebStore.Services.Blogs.InSQL
 {
     /// <summary>
     /// Работа с базой данных по извлечению данных о Блогах

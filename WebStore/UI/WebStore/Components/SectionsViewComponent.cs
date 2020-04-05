@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.Domain.ViewModels.Product;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 
 namespace WebStore.Components
 {
@@ -30,11 +30,11 @@ namespace WebStore.Components
 
             var parent_sections_views = parent_sections
                .Select(s => new SectionViewModel
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Order = s.Order
-                })
+               {
+                   Id = s.Id,
+                   Name = s.Name,
+                   Order = s.Order
+               })
                .ToList();
 
             foreach (var parent_section in parent_sections_views)

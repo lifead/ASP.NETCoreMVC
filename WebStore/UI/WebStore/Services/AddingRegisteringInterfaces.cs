@@ -4,12 +4,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using WebStore.DAL.Context;
-using WebStore.Data;
 using WebStore.Domain.Entities.Identity;
-using WebStore.Infrastructure.Interfaces;
-using WebStore.Infrastructure.Services.InMemory;
-using WebStore.Infrastructure.Services.InSQL;
-using WebStore.Infrastructure.Services.InCookies;
+using WebStore.Interfaces.Services;
+using WebStore.Services.Blogs.InSQL;
+using WebStore.Services.Data;
+using WebStore.Services.Products.InCookies;
+using WebStore.Services.Products.InMemory;
+using WebStore.Services.Products.InSQL;
 
 namespace WebStore.Services
 {

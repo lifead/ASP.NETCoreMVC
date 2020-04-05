@@ -5,8 +5,7 @@ using System.Linq;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Models;
 using WebStore.Domain.ViewModels.Product;
-using WebStore.Infrastructure.Interfaces;
-
+using WebStore.Interfaces.Services;
 using WebStore.Services;
 
 

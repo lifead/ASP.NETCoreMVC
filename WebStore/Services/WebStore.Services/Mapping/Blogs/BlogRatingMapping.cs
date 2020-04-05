@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebStore.Domain.Entities.Blog;
+﻿using WebStore.Domain.Entities.Blog;
 using WebStore.Domain.ViewModels.Blog;
 
 
-namespace WebStore.Infrastructure.Mapping.Blog
+namespace WebStore.Services.Mapping.Blogs
 {
     public static class BlogRatingMapping
     {

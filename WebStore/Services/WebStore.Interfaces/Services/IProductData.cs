@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Products;
 
-namespace WebStore.Infrastructure.Interfaces
+namespace WebStore.Interfaces.Services
 {
     /// <summary>
     /// Каталог товаров

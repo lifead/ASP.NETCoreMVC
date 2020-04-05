@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Blog;
-using WebStore.Domain.Entities.Products;
 using WebStore.Domain.Entities.Products;
 using WebStore.Domain.Models;
 
-namespace WebStore.Data
+namespace WebStore.Services.Data
 {
     public class TestData
     {
@@ -113,7 +110,7 @@ namespace WebStore.Data
         };
 
         public static IEnumerable<BlogRating> BlogRatings { get; } = new[]
-        { 
+        {
             new BlogRating{ Id = 1, UserId = 1, BlogId = 1, Rating = 5, CreateDate = crDt},
             new BlogRating{ Id = 2, UserId = 2, BlogId = 1, Rating = 4, CreateDate = crDt},
             new BlogRating{ Id = 3, UserId = 1, BlogId = 2, Rating = 5, CreateDate = crDt},

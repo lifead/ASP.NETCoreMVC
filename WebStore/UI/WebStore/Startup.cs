@@ -6,9 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.DAL.Context;
-using WebStore.Data;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Services;
+using WebStore.Services.Data;
 
 namespace WebStore
 {
@@ -21,7 +21,7 @@ namespace WebStore
         public void ConfigureServices(IServiceCollection services)
         {
 
-           
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             //Добавление и регистрация сервисов данного приложения
@@ -42,7 +42,7 @@ namespace WebStore
             app.UseStaticFiles();
             app.UseDefaultFiles();
 
-            
+
 
 
             app.UseRouting();
@@ -63,7 +63,7 @@ namespace WebStore
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}"); 
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

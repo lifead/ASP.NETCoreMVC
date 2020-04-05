@@ -9,10 +9,9 @@ using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Entities.Orders;
 using WebStore.Domain.ViewModels.Orders;
 using WebStore.Domain.ViewModels.Product;
-using WebStore.Infrastructure.Interfaces;
+using WebStore.Interfaces.Services;
 
-
-namespace WebStore.Infrastructure.Services.InSQL
+namespace WebStore.Services.Products.InSQL
 {
     public class SqlOrderService : IOrderService
     {
@@ -52,20 +51,20 @@ namespace WebStore.Infrastructure.Services.InSQL
 
                 await _db.Orders.AddAsync(order);
 
-var _ids = Cart.Items.Select(x => x.Key.Id).AsEnumerable();
-var _products = _db.Products.Where(x => _ids.Contains(x.Id)).AsEnumerable();
-var _notFound = _products.Select(x => x.Id).Where(x => !_ids.Contains(x)).AsEnumerable();
+                var _ids = Cart.Items.Select(x => x.Key.Id).AsEnumerable();
+                var _products = _db.Products.Where(x => _ids.Contains(x.Id)).AsEnumerable();
+                var _notFound = _products.Select(x => x.Id).Where(x => !_ids.Contains(x)).AsEnumerable();
 
-if (_notFound.Count() > 0)
-    throw new InvalidOperationException($"Товары с id:{string.Join(" ," , _notFound)} в базе данных отсутствуют!");
+                if (_notFound.Count() > 0)
+                    throw new InvalidOperationException($"Товары с id:{string.Join(" ,", _notFound)} в базе данных отсутствуют!");
 
 
 
-foreach (var (product_model, quantity) in Cart.Items)
-{
-    var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == product_model.Id);
-    if (product is null)
-        throw new InvalidOperationException($"Товар с id:{product_model.Id} в базе данных на найден!");
+                foreach (var (product_model, quantity) in Cart.Items)
+                {
+                    var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == product_model.Id);
+                    if (product is null)
+                        throw new InvalidOperationException($"Товар с id:{product_model.Id} в базе данных на найден!");
 
                     var order_item = new OrderItem
                     {
