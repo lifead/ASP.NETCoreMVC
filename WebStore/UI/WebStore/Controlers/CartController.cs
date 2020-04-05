@@ -4,9 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities.Orders;
+using WebStore.Domain.ViewModels.Orders;
+using WebStore.Domain.ViewModels.Product;
 using WebStore.Infrastructure.Interfaces;
-using WebStore.ViewModels;
-using WebStore.ViewModels.Orders;
+
 
 namespace WebStore.Controllers
 {

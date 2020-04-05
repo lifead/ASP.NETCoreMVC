@@ -5,7 +5,7 @@ using System.Text;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.Domain.Entities
+namespace WebStore.Domain.Entities.Products
 {
     /// <summary>
     /// Продукт
@@ -40,7 +40,7 @@ namespace WebStore.Domain.Entities
         /// <summary>
         /// Стоимость
         /// </summary>
-        [Column(TypeName ="decimal(18,2)")]
+        [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using WebStore.ViewModels.Blog;
-using System.Linq;
+﻿using System.Linq;
+using WebStore.Domain.ViewModels.Blog;
 
 namespace WebStore.Infrastructure.Mapping.Blog
 {

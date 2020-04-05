@@ -1,9 +1,11 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using WebStore.Domain.Entities;
-using WebStore.Models;
 using WebStore.Domain.Entities.Blog;
+using WebStore.Domain.Entities.Products;
+using WebStore.Domain.Entities.Products;
+using WebStore.Domain.Models;
 
 namespace WebStore.Data
 {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.Entities.Products;
 using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Areas.Admin.Controllers

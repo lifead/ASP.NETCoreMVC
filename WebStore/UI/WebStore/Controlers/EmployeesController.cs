@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Domain.Models;
+using WebStore.Domain.ViewModels.Product;
 using WebStore.Infrastructure.Interfaces;
-using WebStore.Models;
+
 using WebStore.Services;
-using WebStore.ViewModels;
+
 
 
 namespace WebStore.Controlers

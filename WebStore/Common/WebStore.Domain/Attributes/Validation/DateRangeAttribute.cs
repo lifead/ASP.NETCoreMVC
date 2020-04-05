@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace WebStore.Attributes.Validation
+namespace WebStore.Domain.Attributes.Validation
 {
     /// <summary>
     /// Проверка валидности даты для указанного диапазона
@@ -40,7 +40,7 @@ namespace WebStore.Attributes.Validation
         /// </summary>
         /// <param name="minDate">Минимальная дата в формате yyyy.mm.dd</param>
         /// <param name="errorMessage"></param>
-        public DateRangeAttribute(string minDate): //, string errorMessage = null) :
+        public DateRangeAttribute(string minDate) : //, string errorMessage = null) :
             this(minDate, "")
         {
         }

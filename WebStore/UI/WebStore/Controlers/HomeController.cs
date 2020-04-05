@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using WebStore.Models;
 using WebStore.Services;
 
 namespace WebStore.Controlers

@@ -1,7 +1,7 @@
 ﻿using System;
 using WebStore.Domain.Entities.Base;
 
-namespace WebStore.ViewModels.Blog
+namespace WebStore.Domain.ViewModels.Blog
 {
     /// <summary>
     /// Рейтинг блога

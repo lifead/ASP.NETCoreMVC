@@ -2,6 +2,7 @@
 using System.Linq;
 using WebStore.Data;
 using WebStore.Domain.Entities;
+using WebStore.Domain.Entities.Products;
 using WebStore.Infrastructure.Interfaces;
 
 namespace WebStore.Infrastructure.Services.InMemory

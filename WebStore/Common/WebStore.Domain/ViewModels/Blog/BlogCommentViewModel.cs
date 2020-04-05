@@ -2,7 +2,7 @@
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.ViewModels.Blog
+namespace WebStore.Domain.ViewModels.Blog
 {
     /// <summary>
     /// Комментарий к записи блога

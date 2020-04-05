@@ -2,9 +2,9 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using WebStore.Attributes.Validation;
+using WebStore.Domain.Attributes.Validation;
 
-namespace WebStore.ViewModels
+namespace WebStore.Domain.ViewModels.Product
 {
     public class EmployeeViewModel
     {

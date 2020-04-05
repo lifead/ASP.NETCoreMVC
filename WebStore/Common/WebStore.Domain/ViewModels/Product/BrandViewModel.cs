@@ -1,6 +1,6 @@
 ﻿using WebStore.Domain.Entities.Base.Interfaces;
 
-namespace WebStore.ViewModels
+namespace WebStore.Domain.ViewModels.Product
 {
     /// <summary>
     /// ViewModel для вывода перечня брендов

@@ -1,5 +1,5 @@
 ﻿using WebStore.Domain.Entities.Blog;
-using WebStore.ViewModels.Blog;
+using WebStore.Domain.ViewModels.Blog;
 
 namespace WebStore.Infrastructure.Mapping.Blog
 {

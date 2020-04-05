@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace WebStore.Models
+namespace WebStore.Domain.Models
 {
     /// <summary>
     /// Сотрудник
@@ -47,7 +47,7 @@ namespace WebStore.Models
         /// Адрес электронной почты
         /// </summary>
         [DisplayName("Адрес электронной почты")]
-        public string Email{ get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// Дата рождения
