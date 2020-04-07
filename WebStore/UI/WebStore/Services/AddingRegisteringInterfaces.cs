@@ -5,12 +5,14 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Interfaces.Api;
 using WebStore.Interfaces.Services;
 using WebStore.Services.Blogs.InSQL;
 using WebStore.Services.Data;
 using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InMemory;
 using WebStore.Services.Products.InSQL;
+using WebStore.Clients.Values;
 
 namespace WebStore.Services
 {
@@ -78,6 +80,9 @@ namespace WebStore.Services
             services.AddScoped<IBlogData, SqlBlogData>();
             services.AddScoped<ICartService, CookiesCartService>();
             services.AddScoped<IOrderService, SqlOrderService>();
+
+            services.AddScoped<IValuesService, ValuesClient>();
+
 
             services.AddTransient<WebStoreDBInitializer>();
 
