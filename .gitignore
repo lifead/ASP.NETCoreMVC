@@ -348,9 +348,14 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/WebStore/WebStore/wwwroot/lib
-/WebStore/WebStore/wwwroot/css/site.min.css
-/WebStore/WebStore/wwwroot/css/site.css
-/WebStore/WebStore/wwwroot/js/site.min.js.gz
-/WebStore/WebStore/wwwroot/js/site.min.js
+/WebStore/UI/WebStore/wwwroot/lib
+/WebStore/UI/WebStore/wwwroot/css/site.min.css
+/WebStore/UI/WebStore/wwwroot/css/site.css
+/WebStore/UI/WebStore/wwwroot/js/site.min.js.gz
+/WebStore/UI/WebStore/wwwroot/js/site.min.js
+/WebStore/UI/WebStore/wwwroot/js/site.js
+
+/WebStore/WebStore/wwwroot/css
 /WebStore/WebStore/wwwroot/js/site.js
+/WebStore/WebStore/wwwroot/js/site.min.js
+/WebStore/WebStore/wwwroot/js/site.min.js.gz
