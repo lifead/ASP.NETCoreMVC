@@ -13,7 +13,7 @@
 
                 @inject IProductData catalog;
 
-                <partial name="Partial/_FeaturesItems" model="@catalog.GetProducts().ToView()" />
+                <partial name="Partial/_FeaturesItems" model="@catalog.GetProducts().Select(ProductMapping.FromDTO).ToView()" />
                 <partial name="Partial/_CategoryTab" />
                 <partial name="Partial/_RecommendedItems" />
 
