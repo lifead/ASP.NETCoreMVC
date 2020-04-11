@@ -13,6 +13,9 @@ using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InMemory;
 using WebStore.Services.Products.InSQL;
 using WebStore.Clients.Values;
+using WebStore.Clients.Employees;
+using WebStore.Clients.Products;
+using WebStore.Clients.Orders;
 
 namespace WebStore.Services
 {
@@ -72,14 +75,17 @@ namespace WebStore.Services
             //AddSingleton -   один экзеспляр на все время жизни приложения
 
             //Регистрация для работы со списком сотрудников
-            services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
+            services.AddSingleton<IEmployeesData, EmployeesClient>();
+            services.AddScoped<IProductData, ProductsClient>();
+            services.AddScoped<IOrderService, OrdersClient>();
 
             //Регистрация для работы с перечнем секций, каталогов и фильтрами продуктов
             //services.AddSingleton<IProductData, InMemoryProductData>();
-            services.AddScoped<IProductData, SqlProductData>();
+            //services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IBlogData, SqlBlogData>();
             services.AddScoped<ICartService, CookiesCartService>();
-            services.AddScoped<IOrderService, SqlOrderService>();
+            //services.AddScoped<IOrderService, SqlOrderService>();
 
             services.AddScoped<IValuesService, ValuesClient>();
 
