@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WebStore.DAL.Context;
 using WebStore.Domain.DTO.Orders;
 using WebStore.Domain.Entities.Identity;
@@ -28,8 +28,8 @@ namespace WebStore.Services.Products.InSQL
            .Include(order => order.User)
            .Include(order => order.OrderItems)
            .Where(order => order.User.UserName == UserName)
-           .Select(OrderMapping.ToDTO)
-           .AsEnumerable();
+           .AsEnumerable()
+           .Select(o => o.ToDTO());
 
         public OrderDTO GetOrderById(int id) => _db.Orders
            .Include(order => order.OrderItems)

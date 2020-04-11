@@ -26,6 +26,10 @@ namespace WebStore.ServiceHosting.Controllers
         public OrderDTO GetOrderById(int id) => _OrderService.GetOrderById(id);
 
         [HttpPost("{UserName?}")]
-        public Task<OrderDTO> CreateOrderAsync(string UserName, CreateOrderModel OrderModel) => _OrderService.CreateOrderAsync(UserName, OrderModel);
+        public Task<OrderDTO> CreateOrderAsync(string UserName, CreateOrderModel OrderModel)
+        {
+            var order = _OrderService.CreateOrderAsync(UserName, OrderModel);
+            return order;
+        }
     }
 }

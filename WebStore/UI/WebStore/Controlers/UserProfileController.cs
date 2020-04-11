@@ -12,15 +12,19 @@ namespace WebStore.Controllers
     {
         public IActionResult Index() => View();
 
-        public IActionResult Orders([FromServices] IOrderService OrderService) =>
-            View(OrderService.GetUserOrders(User.Identity.Name)
-               .Select(order => new UserOrderViewModel
-               {
-                   Id = order.Id,
-                   Name = order.Name,
-                   Address = order.Address,
-                   Phone = order.Phone,
-                   TotalSum = order.OrderItems.Sum(i => i.Price * i.Quantity)
-               }));
+        public IActionResult Orders([FromServices] IOrderService OrderService)
+        {
+            var userOrders = OrderService.GetUserOrders(User.Identity.Name);
+            var userOrdersViewModel = userOrders.Select(order => new UserOrderViewModel
+                                        {
+                                            Id = order.Id,
+                                            Name = order.Name,
+                                            Address = order.Address,
+                                            Phone = order.Phone,
+                                            TotalSum = order.OrderItems.Sum(i => i.Price * i.Quantity)
+                                        });
+
+            return View(userOrdersViewModel);
+        }
     }
 }
