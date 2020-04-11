@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
+using WebStore.Domain.DTO.Orders;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Entities.Orders;
-using WebStore.Domain.ViewModels.Orders;
-using WebStore.Domain.ViewModels.Product;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 
 namespace WebStore.Services.Products.InSQL
 {
@@ -24,17 +24,19 @@ namespace WebStore.Services.Products.InSQL
             _UserManager = UserManager;
         }
 
-        public IEnumerable<Order> GetUserOrders(string UserName) => _db.Orders
+        public IEnumerable<OrderDTO> GetUserOrders(string UserName) => _db.Orders
            .Include(order => order.User)
            .Include(order => order.OrderItems)
            .Where(order => order.User.UserName == UserName)
+           .Select(OrderMapping.ToDTO)
            .AsEnumerable();
 
-        public Order GetOrderById(int id) => _db.Orders
+        public OrderDTO GetOrderById(int id) => _db.Orders
            .Include(order => order.OrderItems)
-           .FirstOrDefault(order => order.Id == id);
+           .FirstOrDefault(order => order.Id == id)
+           .ToDTO();
 
-        public async Task<Order> CreateOrderAsync(string UserName, CartViewModel Cart, OrderViewModel OrderModel)
+        public async Task<OrderDTO> CreateOrderAsync(string UserName, CreateOrderModel OrderModel)
         {
             var user = await _UserManager.FindByNameAsync(UserName);
 
@@ -42,35 +44,26 @@ namespace WebStore.Services.Products.InSQL
             {
                 var order = new Order
                 {
-                    Name = OrderModel.Name,
-                    Address = OrderModel.Address,
-                    Phone = OrderModel.Phone,
+                    Name = OrderModel.OrderViewModel.Name,
+                    Address = OrderModel.OrderViewModel.Address,
+                    Phone = OrderModel.OrderViewModel.Phone,
                     User = user,
                     Date = DateTime.Now
                 };
 
                 await _db.Orders.AddAsync(order);
 
-                var _ids = Cart.Items.Select(x => x.Key.Id).AsEnumerable();
-                var _products = _db.Products.Where(x => _ids.Contains(x.Id)).AsEnumerable();
-                var _notFound = _products.Select(x => x.Id).Where(x => !_ids.Contains(x)).AsEnumerable();
-
-                if (_notFound.Count() > 0)
-                    throw new InvalidOperationException($"Товары с id:{string.Join(" ,", _notFound)} в базе данных отсутствуют!");
-
-
-
-                foreach (var (product_model, quantity) in Cart.Items)
+                foreach (var item in OrderModel.OrderItems)
                 {
-                    var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == product_model.Id);
+                    var product = await _db.Products.FirstOrDefaultAsync(p => p.Id == item.Id);
                     if (product is null)
-                        throw new InvalidOperationException($"Товар с id:{product_model.Id} в базе данных на найден!");
+                        throw new InvalidOperationException($"Товар с id:{item.Id} в базе данных на найден!");
 
                     var order_item = new OrderItem
                     {
                         Order = order,
                         Price = product.Price,
-                        Quantity = quantity,
+                        Quantity = item.Quantity,
                         Product = product
                     };
 
@@ -80,7 +73,7 @@ namespace WebStore.Services.Products.InSQL
                 await _db.SaveChangesAsync();
                 await transaction.CommitAsync();
 
-                return order;
+                return order.ToDTO();
             }
         }
     }
