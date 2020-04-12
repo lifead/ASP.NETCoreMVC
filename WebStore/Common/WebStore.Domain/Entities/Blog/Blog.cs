@@ -11,6 +11,11 @@ namespace WebStore.Domain.Entities.Blog
     /// </summary>
     public class Blog : BaseEntity, IOrderedEntity
     {
+        /// <summary>
+        /// Идентификатор пользователя
+        /// </summary>
+        public string UserId { get; set; }
+
 
         public int Order { get; set; }
 

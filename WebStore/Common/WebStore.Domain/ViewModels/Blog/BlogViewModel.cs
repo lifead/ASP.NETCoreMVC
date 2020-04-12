@@ -10,6 +10,11 @@ namespace WebStore.Domain.ViewModels.Blog
     /// </summary>
     public class BlogViewModel : BaseEntity, IOrderedEntity
     {
+        /// <summary>
+        /// Id пользователя
+        /// </summary>
+        public string UserId { get; set; }
+
 
         public int Order { get; set; }
 
