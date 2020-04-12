@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.Entities.Blog
+namespace WebStore.Domain.Entities.Blogs
 {
     /// <summary>
     /// Блог
@@ -12,9 +13,12 @@ namespace WebStore.Domain.Entities.Blog
     public class Blog : BaseEntity, IOrderedEntity
     {
         /// <summary>
-        /// Идентификатор пользователя
+        /// Идентификатор пользователя (автора)
         /// </summary>
         public string UserId { get; set; }
+        
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
 
 
         public int Order { get; set; }
@@ -24,10 +28,6 @@ namespace WebStore.Domain.Entities.Blog
         /// </summary>
         public string Title { get; set; }
 
-        /// <summary>
-        /// Автор блога
-        /// </summary>
-        public string Author { get; set; }
 
         /// <summary>
         /// Дата добавления блога

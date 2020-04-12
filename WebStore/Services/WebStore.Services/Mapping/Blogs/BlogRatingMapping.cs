@@ -1,4 +1,4 @@
-﻿using WebStore.Domain.Entities.Blog;
+﻿using WebStore.Domain.Entities.Blogs;
 using WebStore.Domain.ViewModels.Blog;
 
 

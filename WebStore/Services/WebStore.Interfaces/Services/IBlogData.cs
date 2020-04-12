@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using WebStore.Domain.Entities.Blog;
+using WebStore.Domain.Entities.Blogs;
 
 namespace WebStore.Interfaces.Services
 {

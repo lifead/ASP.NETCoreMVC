@@ -2,8 +2,9 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.Entities.Blog
+namespace WebStore.Domain.Entities.Blogs
 {
     /// <summary>
     /// Ответ на запись в блоге
@@ -38,15 +39,13 @@ namespace WebStore.Domain.Entities.Blog
 
 
         /// <summary>
-        /// Id пользователя
+        /// Id пользователя (автора)
         /// </summary>
         public string UserId { get; set; }
 
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
 
-        /// <summary>
-        /// Автор ответа на запись в блоге
-        /// </summary>
-        public string Author { get; set; }
 
         /// <summary>
         /// Ссылка на картинку

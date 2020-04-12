@@ -1,8 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.Entities.Blog
+namespace WebStore.Domain.Entities.Blogs
 {
     /// <summary>
     /// Рейтинг блога
@@ -19,9 +20,12 @@ namespace WebStore.Domain.Entities.Blog
         public virtual Blog Blog { get; set; }
 
         /// <summary>
-        /// Id пользователя
+        /// Id пользователя (автора)
         /// </summary>
         public string UserId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
 
         /// <summary>
         /// Рейтинг

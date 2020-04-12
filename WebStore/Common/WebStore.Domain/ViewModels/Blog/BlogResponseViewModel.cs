@@ -43,7 +43,7 @@ namespace WebStore.Domain.ViewModels.Blog
         /// <summary>
         /// Автор ответа на запись в блоге
         /// </summary>
-        public string Author { get; set; }
+        public string Author { get; set; } = "!!!";
 
         /// <summary>
         /// Адрес изображения отзыва

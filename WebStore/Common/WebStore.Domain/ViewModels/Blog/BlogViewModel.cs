@@ -26,7 +26,7 @@ namespace WebStore.Domain.ViewModels.Blog
         /// <summary>
         /// Автор блога
         /// </summary>
-        public string Author { get; set; }
+        public string Author { get; set; } = "!!!";
 
         /// <summary>
         /// Дата добавления блога

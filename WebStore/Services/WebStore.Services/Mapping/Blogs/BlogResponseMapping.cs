@@ -1,4 +1,4 @@
-﻿using WebStore.Domain.Entities.Blog;
+﻿using WebStore.Domain.Entities.Blogs;
 using WebStore.Domain.ViewModels.Blog;
 
 namespace WebStore.Services.Mapping.Blogs
@@ -9,7 +9,6 @@ namespace WebStore.Services.Mapping.Blogs
         {
             Id = p.Id,
             BlogId = p.BlogId,
-            Author = p.Author,
             CreateDate = p.CreateDate,
             UserId = p.UserId,
             BlogResponseId = p.BlogResponseId,

@@ -5,14 +5,13 @@ namespace WebStore.Services.Mapping.Blogs
 {
     public static class BlogMapping
     {
-        public static BlogViewModel ToView(this Domain.Entities.Blog.Blog p)
+        public static BlogViewModel ToView(this Domain.Entities.Blogs.Blog p)
         {
 
             return p == null ? null :
                 new BlogViewModel
                 {
                     Id = p.Id,
-                    Author = p.Author,
                     BlogComments = p.BlogComments.Select(x => x.ToView()).ToList(),//.AsEnumerable(),
                     BlogRatings = p.BlogRatings.Select(x => x.ToView()).ToList(),//.AsEnumerable(),
                     BlogResponses = p.BlogResponses.Select(x => x.ToView()).ToList(),//.AsEnumerable(),
