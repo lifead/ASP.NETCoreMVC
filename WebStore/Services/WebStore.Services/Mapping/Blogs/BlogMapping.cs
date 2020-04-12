@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using WebStore.Domain.ViewModels.Blog;
 
 namespace WebStore.Services.Mapping.Blogs
@@ -12,14 +13,15 @@ namespace WebStore.Services.Mapping.Blogs
                 new BlogViewModel
                 {
                     Id = p.Id,
-                    BlogComments = p.BlogComments.Select(x => x.ToView()).ToList(),//.AsEnumerable(),
-                    BlogRatings = p.BlogRatings.Select(x => x.ToView()).ToList(),//.AsEnumerable(),
-                    BlogResponses = p.BlogResponses.Select(x => x.ToView()).ToList(),//.AsEnumerable(),
+                    BlogComments = p.BlogComments?.Select(x => x.ToView()).ToList() ?? new List<BlogCommentViewModel>(),
+                    BlogRatings = p.BlogRatings?.Select(x => x.ToView()).ToList() ?? new List<BlogRatingViewModel>(),
+                    BlogResponses = p.BlogResponses?.Select(x => x.ToView()).ToList() ?? new List<BlogResponseViewModel>(),
                     CreateDate = p.CreateDate,
                     Order = p.Order,
                     Text = p.Text,
                     ImageUrl = p.ImageUrl,
-                    Title = p.Title
+                    Title = p.Title,
+                    Author = p.User?.ToString() ?? "---"
                 };
         }
 

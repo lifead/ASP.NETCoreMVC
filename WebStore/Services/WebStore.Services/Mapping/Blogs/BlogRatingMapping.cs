@@ -12,7 +12,7 @@ namespace WebStore.Services.Mapping.Blogs
             BlogId = p.BlogId,
             CreateDate = p.CreateDate,
             UserId = p.UserId,
-            Rating = p.Rating,
+            Rating = p.Rating
             //Blog = p.Blog.ToView()
         };
     }

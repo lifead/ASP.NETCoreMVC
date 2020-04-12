@@ -14,7 +14,8 @@ namespace WebStore.Services.Mapping.Blogs
             BlogResponseId = p.BlogResponseId,
             Order = p.Order,
             ResponseText = p.ResponseText,
-            ImageUrl = p.ImageUrl
+            ImageUrl = p.ImageUrl,
+            Author = p.User?.ToString() ?? "&&&&"
             //Blog = p.Blog.ToView(),
             //ParentBlogResponse = p.ParentBlogResponse.ToView()
         };

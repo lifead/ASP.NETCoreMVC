@@ -14,6 +14,7 @@ namespace WebStore.Services.Mapping.Blogs
             CreateDate = p.CreateDate,
             Order = p.Order,
             UserId = p.UserId,
+            Author = p.User?.ToString() ?? "****"
             //Blog = p.Blog.ToView()
         };
     }
