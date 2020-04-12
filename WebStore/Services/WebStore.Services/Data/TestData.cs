@@ -85,9 +85,9 @@ namespace WebStore.Services.Data
 
         public static IEnumerable<Blog> Blogs { get; } = new[]
         {
-            new Blog{ Id = 1, UserId="2", Author = "Mac Doe", ImageUrl = "blog-one.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
-            new Blog{ Id = 2, UserId="2", Author = "Mac Doe", ImageUrl = "blog-two.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
-            new Blog{ Id = 3, UserId="2", Author = "Mac Doe", ImageUrl = "blog-three.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 1, UserId="79a576b1-80ca-482a-bb37-03d002f4c088", Author = "Mac Doe", ImageUrl = "blog-one.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 2, UserId="79a576b1-80ca-482a-bb37-03d002f4c088", Author = "Mac Doe", ImageUrl = "blog-two.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 3, UserId="79a576b1-80ca-482a-bb37-03d002f4c088", Author = "Mac Doe", ImageUrl = "blog-three.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
         };
 
         public static IEnumerable<BlogComment> BlogComments { get; } = new[]
@@ -99,92 +99,26 @@ namespace WebStore.Services.Data
                 Comment = textComment,
                 CreateDate = crDt,
                 Order=1,
-                UserId="3"
+                UserId="f7c34c09-f8c3-4821-a483-9113e9fe8b43"
             }
         };
 
         public static IEnumerable<BlogResponse> BlogResponses { get; } = new[]
         {
-            new BlogResponse {Id = 1, UserId = "1", ImageUrl = "man-four.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,ResponseText = textComment},
-            new BlogResponse {Id = 2, UserId = "1", ImageUrl = "man-one.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = 1,CreateDate = crDt,Order = 1,ResponseText = textComment},
-            new BlogResponse {Id = 3, UserId = "1", ImageUrl = "man-three.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,ResponseText = textComment}
+            new BlogResponse {Id = 1, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", ImageUrl = "man-four.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,ResponseText = textComment},
+            new BlogResponse {Id = 2, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", ImageUrl = "man-one.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = 1,CreateDate = crDt,Order = 1,ResponseText = textComment},
+            new BlogResponse {Id = 3, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", ImageUrl = "man-three.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,ResponseText = textComment}
         };
 
         public static IEnumerable<BlogRating> BlogRatings { get; } = new[]
         {
-            new BlogRating{ Id = 1, UserId = "1", BlogId = 1, Rating = 5, CreateDate = crDt},
-            new BlogRating{ Id = 2, UserId = "2", BlogId = 1, Rating = 4, CreateDate = crDt},
-            new BlogRating{ Id = 3, UserId = "1", BlogId = 2, Rating = 5, CreateDate = crDt},
-            new BlogRating{ Id = 4, UserId = "2", BlogId = 2, Rating = 4, CreateDate = crDt},
-            new BlogRating{ Id = 5, UserId = "1", BlogId = 3, Rating = 5, CreateDate = crDt},
-            new BlogRating{ Id = 6, UserId = "2", BlogId = 3, Rating = 4, CreateDate = crDt},
+            new BlogRating{ Id = 1, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", BlogId = 1, Rating = 5, CreateDate = crDt},
+            new BlogRating{ Id = 2, UserId = "79a576b1-80ca-482a-bb37-03d002f4c088", BlogId = 1, Rating = 4, CreateDate = crDt},
+            new BlogRating{ Id = 3, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", BlogId = 2, Rating = 5, CreateDate = crDt},
+            new BlogRating{ Id = 4, UserId = "79a576b1-80ca-482a-bb37-03d002f4c088", BlogId = 2, Rating = 4, CreateDate = crDt},
+            new BlogRating{ Id = 5, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", BlogId = 3, Rating = 5, CreateDate = crDt},
+            new BlogRating{ Id = 6, UserId = "79a576b1-80ca-482a-bb37-03d002f4c088", BlogId = 3, Rating = 4, CreateDate = crDt},
         };
-
-
-        /// <summary>
-        /// Перечень пользователей для работы блогов
-        /// </summary>
-        public static IEnumerable<User> Users { get; } = new[]
-        {
-            new User{
-                Id="0f805845-bdb9-41c3-ad54-4bdd5787c3e8",
-                UserName="JanisGallagher",
-                FirstName="Janis",
-                Surname="Gallagher",  
-                NormalizedUserName="JANISGALLAGHER",
-                Email="NULL",NormalizedEmail="NULL",
-                EmailConfirmed=false,
-                PasswordHash="AEAZA8lIZ",
-                SecurityStamp="V7FBK7BUW",
-                ConcurrencyStamp="c4f88e6e",
-                PhoneNumber="NULL",
-                PhoneNumberConfirmed=false,
-                TwoFactorEnabled=false,
-                LockoutEnd=null,
-                LockoutEnabled=true,
-                AccessFailedCount=0
-            },       
-            new User{
-                Id="79a576b1-80ca-482a-bb37-03d002f4c088",
-                UserName="MacDoe",
-                FirstName="Mac",
-                Surname="Doe",
-                NormalizedUserName="MACDOE",
-                Email="NULL",
-                NormalizedEmail="NULL",
-                EmailConfirmed=false,
-                PasswordHash="AEAZA8lIZ",
-                SecurityStamp="V7FBK7BUW",
-                ConcurrencyStamp="c4f88e6e",
-                PhoneNumber="NULL",
-                PhoneNumberConfirmed=false,
-                TwoFactorEnabled=false,
-                LockoutEnd=null,
-                LockoutEnabled=true,
-                AccessFailedCount=0,
-            },
-            new User
-            {
-                Id="f7c34c09-f8c3-4821-a483-9113e9fe8b43",
-                UserName="AnnieDavis",
-                NormalizedUserName="ANNIEDAVIS",
-                FirstName="Annie",
-                Surname="Davis",
-                Email="NULL",
-                NormalizedEmail="NULL",
-                EmailConfirmed=false,
-                PasswordHash="AEAZA8lIZ",
-                SecurityStamp="V7FBK7BUW",
-                ConcurrencyStamp="c4f88e6e",
-                PhoneNumber="NULL",
-                PhoneNumberConfirmed=false,
-                TwoFactorEnabled=false,
-                LockoutEnd=null,
-                LockoutEnabled=true,
-                AccessFailedCount=0,
-            }
-        };
-
     }
 };
 
