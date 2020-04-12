@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebStore.DAL.Context;
+using WebStore.Domain.DTO.Blogs;
 using WebStore.Domain.Entities.Blogs;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping.Blogs;
 
 namespace WebStore.Services.Blogs.InSQL
 {
@@ -19,16 +21,17 @@ namespace WebStore.Services.Blogs.InSQL
 
         public SqlBlogData(WebStoreDB db) => _db = db;
 
-        public IEnumerable<Blog> GetAll()
+        public IEnumerable<BlogDTO> GetAll()
         {
             var blogs = _db.Blogs
-                    .Include(x => x.BlogComments)
+                    //.Include(x => x.BlogComments)
                     .Include(x => x.User)
+                    .Select(x => x.ToDTO())
                     .ToList();
             return blogs;
         }
 
-        public Blog GetById(int? Id)
+        public BlogDTO GetById(int? Id)
         {
             if (Id == null)
                 Id = _db.Blogs.Max(x => x.Id);
@@ -41,7 +44,7 @@ namespace WebStore.Services.Blogs.InSQL
             blog.BlogRatings = _GetBlogRatings(blog.Id);
             blog.BlogResponses = _GetResponses(blog.Id);
 
-            return blog;
+            return blog.ToDTO();
         }
 
         private List<BlogRating> _GetBlogRatings(int BlogId)

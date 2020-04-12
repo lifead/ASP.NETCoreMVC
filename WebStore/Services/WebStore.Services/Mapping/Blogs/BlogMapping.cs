@@ -27,7 +27,7 @@ namespace WebStore.Services.Mapping.Blogs
                 };
         }
 
-        public static BlogDTO ToDTO(Blog p) => p == null ? null :
+        public static BlogDTO ToDTO(this Blog p) => p == null ? null :
                 new BlogDTO
                 {
                     Id = p.Id,
@@ -47,7 +47,7 @@ namespace WebStore.Services.Mapping.Blogs
                     }
                 };
 
-        public static Blog FromDTO(BlogDTO p) => p == null ? null :
+        public static Blog FromDTO(this BlogDTO p) => p == null ? null :
           new Blog
           {
               Id = p.Id,

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebStore.Domain.DTO.Blogs;
 using WebStore.Domain.Entities.Blogs;
 
 namespace WebStore.Interfaces.Services
@@ -12,13 +13,13 @@ namespace WebStore.Interfaces.Services
         /// Получить все блоги
         /// </summary>
         /// <returns>Перечень блогов сайта</returns>
-        IEnumerable<Blog> GetAll();
+        IEnumerable<BlogDTO> GetAll();
 
         /// <summary>
         /// Блог
         /// </summary>
         /// <param name="id">Идентификатор блога</param>
         /// <returns>Экземпляр блога</returns>
-        Blog GetById(int? id);
+        BlogDTO GetById(int? id);
     }
 }

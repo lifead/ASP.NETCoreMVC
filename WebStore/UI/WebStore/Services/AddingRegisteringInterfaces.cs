@@ -16,6 +16,7 @@ using WebStore.Clients.Values;
 using WebStore.Clients.Employees;
 using WebStore.Clients.Products;
 using WebStore.Clients.Orders;
+using WebStore.Clients.Blogs;
 
 namespace WebStore.Services
 {
@@ -79,11 +80,13 @@ namespace WebStore.Services
             services.AddSingleton<IEmployeesData, EmployeesClient>();
             services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<IOrderService, OrdersClient>();
+            services.AddScoped<IBlogData, BlogsClient>();
+
 
             //Регистрация для работы с перечнем секций, каталогов и фильтрами продуктов
             //services.AddSingleton<IProductData, InMemoryProductData>();
             //services.AddScoped<IProductData, SqlProductData>();
-            services.AddScoped<IBlogData, SqlBlogData>();
+            //services.AddScoped<IBlogData, SqlBlogData>();
             services.AddScoped<ICartService, CookiesCartService>();
             //services.AddScoped<IOrderService, SqlOrderService>();
 
