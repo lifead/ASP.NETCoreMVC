@@ -24,13 +24,13 @@ namespace WebStore.Domain.ViewModels.Blog
         /// <summary>
         /// Id пользователя
         /// </summary>
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
 
         /// <summary>
         /// Автор комментария
         /// </summary>
-        public string Author { get; set; }
+        public string Author { get; set; } = "!!!";
 
         /// <summary>
         /// Комментарий

@@ -71,6 +71,39 @@ namespace WebStore.Services.Data
                 }
             }
 
+            #region Добавление пользователей для работы раздела Блог
+            if (await _UserManager.FindByNameAsync("JanisGallagher") is null)
+            {
+                var user1 = new User
+                {
+                    Id="0f805845-bdb9-41c3-ad54-4bdd5787c3e8", 
+                    UserName="JanisGallagher",
+                    FirstName="Janis",
+                    Surname="Gallagher"
+                };
+                var create_result1 = await _UserManager.CreateAsync(user1, Guid.NewGuid().ToString());
+
+                var user2 = new User
+                {
+                    Id = "79a576b1-80ca-482a-bb37-03d002f4c088",
+                    UserName = "MacDoe",
+                    FirstName = "Mac",
+                    Surname = "Doe"
+                };
+                var create_result2 = await _UserManager.CreateAsync(user2, Guid.NewGuid().ToString());
+
+                var user3 = new User
+                {
+                    Id = "f7c34c09-f8c3-4821-a483-9113e9fe8b43",
+                    UserName = "AnnieDavis",
+                    FirstName = "Annie",
+                    Surname = "Davis"
+                };
+                var create_result3 = await _UserManager.CreateAsync(user3, Guid.NewGuid().ToString());
+                #endregion
+
+            }
+
         }
         #endregion
 

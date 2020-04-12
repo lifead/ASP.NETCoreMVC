@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebStore.Domain.Entities.Blog;
+using WebStore.Domain.Entities.Blogs;
+using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Entities.Products;
 using WebStore.Domain.Models;
 
@@ -84,42 +85,39 @@ namespace WebStore.Services.Data
 
         public static IEnumerable<Blog> Blogs { get; } = new[]
         {
-            new Blog{ Id = 1, Author = "Mac Doe", ImageUrl = "blog-one.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
-            new Blog{ Id = 2, Author = "Mac Doe", ImageUrl = "blog-two.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
-            new Blog{ Id = 3, Author = "Mac Doe", ImageUrl = "blog-three.jpg", CreateDate = crDt, Title = name, Order = 1, Text = text},
+            new Blog{ Id = 1, UserId="79a576b1-80ca-482a-bb37-03d002f4c088", ImageUrl = "blog-one.jpg", CreateDate = crDt, Title = name,   Text = text},
+            new Blog{ Id = 2, UserId="79a576b1-80ca-482a-bb37-03d002f4c088", ImageUrl = "blog-two.jpg", CreateDate = crDt, Title = name,   Text = text},
+            new Blog{ Id = 3, UserId="79a576b1-80ca-482a-bb37-03d002f4c088", ImageUrl = "blog-three.jpg", CreateDate = crDt, Title = name, Text = text},
         };
+
 
         public static IEnumerable<BlogComment> BlogComments { get; } = new[]
         {
             new BlogComment{
                 Id = 1,
-                Author = "Annie Davis",
                 BlogId=1,
                 Comment = textComment,
                 CreateDate = crDt,
-                Order=1,
-                UserId=1
+                UserId="f7c34c09-f8c3-4821-a483-9113e9fe8b43"
             }
         };
 
         public static IEnumerable<BlogResponse> BlogResponses { get; } = new[]
         {
-            new BlogResponse {Id = 1, ImageUrl = "man-four.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment},
-            new BlogResponse {Id = 2, ImageUrl = "man-one.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = 1,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment},
-            new BlogResponse {Id = 3, ImageUrl = "man-three.jpg", Author = "JANIS GALLAGHER",BlogId = 1,BlogResponseId = null,CreateDate = crDt,Order = 1,UserId = 1,ResponseText = textComment}
+            new BlogResponse {Id = 1, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", ImageUrl = "man-four.jpg", BlogId = 1,BlogResponseId = null,CreateDate = crDt,ResponseText = textComment},
+            new BlogResponse {Id = 2, UserId = "f7c34c09-f8c3-4821-a483-9113e9fe8b43", ImageUrl = "man-one.jpg",  BlogId = 1,BlogResponseId = 1,CreateDate = crDt,   ResponseText = textComment},
+            new BlogResponse {Id = 3, UserId = "79a576b1-80ca-482a-bb37-03d002f4c088", ImageUrl = "man-three.jpg",BlogId = 1,BlogResponseId = null,CreateDate = crDt,ResponseText = textComment}
         };
 
         public static IEnumerable<BlogRating> BlogRatings { get; } = new[]
         {
-            new BlogRating{ Id = 1, UserId = 1, BlogId = 1, Rating = 5, CreateDate = crDt},
-            new BlogRating{ Id = 2, UserId = 2, BlogId = 1, Rating = 4, CreateDate = crDt},
-            new BlogRating{ Id = 3, UserId = 1, BlogId = 2, Rating = 5, CreateDate = crDt},
-            new BlogRating{ Id = 4, UserId = 2, BlogId = 2, Rating = 4, CreateDate = crDt},
-            new BlogRating{ Id = 5, UserId = 1, BlogId = 3, Rating = 5, CreateDate = crDt},
-            new BlogRating{ Id = 6, UserId = 2, BlogId = 3, Rating = 4, CreateDate = crDt},
+            new BlogRating{ Id = 1, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", BlogId = 1, Rating = 5, CreateDate = crDt},
+            new BlogRating{ Id = 2, UserId = "79a576b1-80ca-482a-bb37-03d002f4c088", BlogId = 1, Rating = 4, CreateDate = crDt},
+            new BlogRating{ Id = 3, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", BlogId = 2, Rating = 5, CreateDate = crDt},
+            new BlogRating{ Id = 4, UserId = "79a576b1-80ca-482a-bb37-03d002f4c088", BlogId = 2, Rating = 4, CreateDate = crDt},
+            new BlogRating{ Id = 5, UserId = "0f805845-bdb9-41c3-ad54-4bdd5787c3e8", BlogId = 3, Rating = 5, CreateDate = crDt},
+            new BlogRating{ Id = 6, UserId = "79a576b1-80ca-482a-bb37-03d002f4c088", BlogId = 3, Rating = 4, CreateDate = crDt},
         };
-
-
     }
 };
 

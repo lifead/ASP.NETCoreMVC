@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Blogs.InSQL;
 using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InMemory;
 using WebStore.Services.Products.InSQL;
@@ -31,6 +32,7 @@ namespace WebStore.ServiceHosting
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IOrderService, SqlOrderService>();
+            services.AddScoped<IBlogData, SqlBlogData>();
             //services.AddScoped<ICartService, CookiesCartService>();
             //services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 

@@ -1,28 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 using WebStore.Domain.Entities.Base;
-using WebStore.Domain.Entities.Base.Interfaces;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.Entities.Blog
+namespace WebStore.Domain.DTO.Blogs
 {
-    /// <summary>
-    /// Блог
-    /// </summary>
-    public class Blog : BaseEntity, IOrderedEntity
+    public class BlogDTO : BaseEntity
     {
+        /// <summary>
+        /// Идентификатор пользователя (автора)
+        /// </summary>
+        public string UserId { get; set; }
 
-        public int Order { get; set; }
+        public virtual User User { get; set; }
+
 
         /// <summary>
         /// Заголовок блога
         /// </summary>
         public string Title { get; set; }
 
-        /// <summary>
-        /// Автор блога
-        /// </summary>
-        public string Author { get; set; }
 
         /// <summary>
         /// Дата добавления блога
@@ -32,7 +30,6 @@ namespace WebStore.Domain.Entities.Blog
         /// <summary>
         /// Содержание блока
         /// </summary>
-        [Column(TypeName = "text")]
         public string Text { get; set; }
 
         /// <summary>
@@ -43,16 +40,16 @@ namespace WebStore.Domain.Entities.Blog
         /// <summary>
         /// Список указанных оценок рейтинга
         /// </summary>
-        public virtual ICollection<BlogRating> BlogRatings { get; set; }
+        public virtual ICollection<BlogRatingDTO> BlogRatings { get; set; }
 
         /// <summary>
         /// Список комментариев к блогу
         /// </summary>
-        public virtual ICollection<BlogComment> BlogComments { get; set; }
+        public virtual ICollection<BlogCommentDTO> BlogComments { get; set; }
 
         /// <summary>
         /// Список отзывов на блог
         /// </summary>
-        public virtual ICollection<BlogResponse> BlogResponses { get; set; }
+        public virtual ICollection<BlogResponseDTO> BlogResponses { get; set; }
     }
 }

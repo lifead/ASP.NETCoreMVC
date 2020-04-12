@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.ViewModels.Blog
+namespace WebStore.Domain.Entities.Blogs
 {
     /// <summary>
     /// Блог
     /// </summary>
-    public class BlogViewModel : BaseEntity, IOrderedEntity
+    public class Blog : BaseEntity
     {
         /// <summary>
-        /// Id пользователя
+        /// Идентификатор пользователя (автора)
         /// </summary>
         public string UserId { get; set; }
+        
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
 
-
-        public int Order { get; set; }
 
         /// <summary>
         /// Заголовок блога
         /// </summary>
         public string Title { get; set; }
 
-        /// <summary>
-        /// Автор блога
-        /// </summary>
-        public string Author { get; set; } = "!!!";
 
         /// <summary>
         /// Дата добавления блога
@@ -36,27 +35,27 @@ namespace WebStore.Domain.ViewModels.Blog
         /// <summary>
         /// Содержание блока
         /// </summary>
+        [Column(TypeName = "text")]
         public string Text { get; set; }
 
         /// <summary>
-        /// Адрес изображения блога
+        /// Ссылка на картинку
         /// </summary>
         public string ImageUrl { get; set; }
-
 
         /// <summary>
         /// Список указанных оценок рейтинга
         /// </summary>
-        public virtual IEnumerable<BlogRatingViewModel> BlogRatings { get; set; }
+        public virtual ICollection<BlogRating> BlogRatings { get; set; }
 
         /// <summary>
         /// Список комментариев к блогу
         /// </summary>
-        public virtual IEnumerable<BlogCommentViewModel> BlogComments { get; set; }
+        public virtual ICollection<BlogComment> BlogComments { get; set; }
 
         /// <summary>
         /// Список отзывов на блог
         /// </summary>
-        public virtual IEnumerable<BlogResponseViewModel> BlogResponses { get; set; }
+        public virtual ICollection<BlogResponse> BlogResponses { get; set; }
     }
 }

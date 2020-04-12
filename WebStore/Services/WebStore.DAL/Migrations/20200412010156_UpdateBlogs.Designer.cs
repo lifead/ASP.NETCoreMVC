@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebStore.DAL.Context;
 
 namespace WebStore.DAL.Migrations
 {
     [DbContext(typeof(WebStoreDB))]
-    partial class WebStoreDBModelSnapshot : ModelSnapshot
+    [Migration("20200412010156_UpdateBlogs")]
+    partial class UpdateBlogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,18 +125,24 @@ namespace WebStore.DAL.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.Blog", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Blog.Blog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .HasColumnType("text");
@@ -143,21 +151,22 @@ namespace WebStore.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.BlogComment", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Blog.BlogComment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("BlogId")
                         .HasColumnType("int");
@@ -168,19 +177,20 @@ namespace WebStore.DAL.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BlogId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("BlogComments");
                 });
 
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.BlogRating", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Blog.BlogRating", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,23 +207,24 @@ namespace WebStore.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BlogId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("BlogRatings");
                 });
 
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.BlogResponse", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Blog.BlogResponse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("BlogId")
                         .HasColumnType("int");
@@ -227,19 +238,20 @@ namespace WebStore.DAL.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
                     b.Property<string>("ResponseText")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BlogId");
 
                     b.HasIndex("BlogResponseId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("BlogResponses");
                 });
@@ -290,9 +302,6 @@ namespace WebStore.DAL.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -317,9 +326,6 @@ namespace WebStore.DAL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Surname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -534,48 +540,29 @@ namespace WebStore.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.Blog", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Blog.BlogComment", b =>
                 {
-                    b.HasOne("WebStore.Domain.Entities.Identity.User", "User")
-                        .WithMany("Blogs")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.BlogComment", b =>
-                {
-                    b.HasOne("WebStore.Domain.Entities.Blogs.Blog", "Blog")
+                    b.HasOne("WebStore.Domain.Entities.Blog.Blog", "Blog")
                         .WithMany("BlogComments")
                         .HasForeignKey("BlogId");
-
-                    b.HasOne("WebStore.Domain.Entities.Identity.User", "User")
-                        .WithMany("BlogComments")
-                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.BlogRating", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Blog.BlogRating", b =>
                 {
-                    b.HasOne("WebStore.Domain.Entities.Blogs.Blog", "Blog")
+                    b.HasOne("WebStore.Domain.Entities.Blog.Blog", "Blog")
                         .WithMany("BlogRatings")
                         .HasForeignKey("BlogId");
-
-                    b.HasOne("WebStore.Domain.Entities.Identity.User", "User")
-                        .WithMany("BlogRatings")
-                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("WebStore.Domain.Entities.Blogs.BlogResponse", b =>
+            modelBuilder.Entity("WebStore.Domain.Entities.Blog.BlogResponse", b =>
                 {
-                    b.HasOne("WebStore.Domain.Entities.Blogs.Blog", "Blog")
+                    b.HasOne("WebStore.Domain.Entities.Blog.Blog", "Blog")
                         .WithMany("BlogResponses")
                         .HasForeignKey("BlogId");
 
-                    b.HasOne("WebStore.Domain.Entities.Blogs.BlogResponse", "ParentBlogResponse")
+                    b.HasOne("WebStore.Domain.Entities.Blog.BlogResponse", "ParentBlogResponse")
                         .WithMany()
                         .HasForeignKey("BlogResponseId");
-
-                    b.HasOne("WebStore.Domain.Entities.Identity.User", "User")
-                        .WithMany("GetBlogResponses")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("WebStore.Domain.Entities.Orders.Order", b =>

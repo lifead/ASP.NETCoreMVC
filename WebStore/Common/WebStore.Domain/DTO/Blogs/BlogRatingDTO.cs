@@ -1,24 +1,22 @@
 ﻿using System;
 using WebStore.Domain.Entities.Base;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.ViewModels.Blog
+namespace WebStore.Domain.DTO.Blogs
 {
-    /// <summary>
-    /// Рейтинг блога
-    /// </summary>
-    public class BlogRatingViewModel : BaseEntity
+    public class BlogRatingDTO : BaseEntity
     {
         /// <summary>
         /// Id Блога
         /// </summary>
         public int? BlogId { get; set; }
 
-        public virtual BlogViewModel Blog { get; set; }
-
         /// <summary>
-        /// Id пользователя
+        /// Id пользователя (автора)
         /// </summary>
         public string UserId { get; set; }
+
+        public virtual User User { get; set; }
 
         /// <summary>
         /// Рейтинг

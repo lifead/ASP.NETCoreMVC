@@ -7,5 +7,7 @@
         public const string Products = "api/v1/products";
 
         public const string Orders = "api/v1/orders";
+
+        public const string Blogs = "api/v1/blogs";
     }
 }

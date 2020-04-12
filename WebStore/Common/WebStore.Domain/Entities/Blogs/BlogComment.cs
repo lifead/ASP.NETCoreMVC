@@ -2,20 +2,23 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using WebStore.Domain.Entities.Base;
 using WebStore.Domain.Entities.Base.Interfaces;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.Entities.Blog
+namespace WebStore.Domain.Entities.Blogs
 {
     /// <summary>
     /// Комментарий к записи блога
     /// </summary>
-    public class BlogComment : BaseEntity, IOrderedEntity
+    public class BlogComment : BaseEntity
     {
-        public int Order { get; set; }
 
         /// <summary>
         /// Id Блога
         /// </summary>
         public int? BlogId { get; set; }
+
+        [ForeignKey(nameof(UserId))]
+        public virtual User User { get; set; }
 
         /// <summary>
         /// Блог к которому относиться комментарий
@@ -24,15 +27,10 @@ namespace WebStore.Domain.Entities.Blog
         public virtual Blog Blog { get; set; }
 
         /// <summary>
-        /// Id пользователя
+        /// Id пользователя  (автора)
         /// </summary>
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
-
-        /// <summary>
-        /// Автор комментария
-        /// </summary>
-        public string Author { get; set; }
 
         /// <summary>
         /// Комментарий

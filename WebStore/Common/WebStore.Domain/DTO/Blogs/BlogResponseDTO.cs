@@ -1,52 +1,37 @@
 ﻿using System;
 using WebStore.Domain.Entities.Base;
-using WebStore.Domain.Entities.Base.Interfaces;
+using WebStore.Domain.Entities.Identity;
 
-namespace WebStore.Domain.ViewModels.Blog
+namespace WebStore.Domain.DTO.Blogs
 {
-    /// <summary>
-    /// Ответ на запись в блоге
-    /// </summary>
-    public class BlogResponseViewModel : BaseEntity, IOrderedEntity
+    public class BlogResponseDTO : BaseEntity
     {
-        public int Order { get; set; }
-
         /// <summary>
         /// Id Блога
         /// </summary>
         public int? BlogId { get; set; }
 
         /// <summary>
-        /// Блог к которому относиться ответ на запись
-        /// </summary>
-        public virtual BlogViewModel Blog { get; set; }
-
-
-        /// <summary>
         /// Id Блога
         /// </summary>
         public int? BlogResponseId { get; set; }
 
-
         /// <summary>
         /// Родительская запись в блоге
         /// </summary>
-        public virtual BlogResponseViewModel ParentBlogResponse { get; set; }
+        public virtual BlogResponseDTO ParentBlogResponse { get; set; }
 
 
         /// <summary>
-        /// Id пользователя
+        /// Id пользователя (автора)
         /// </summary>
         public string UserId { get; set; }
 
+        public virtual User User { get; set; }
+
 
         /// <summary>
-        /// Автор ответа на запись в блоге
-        /// </summary>
-        public string Author { get; set; } = "!!!";
-
-        /// <summary>
-        /// Адрес изображения отзыва
+        /// Ссылка на картинку
         /// </summary>
         public string ImageUrl { get; set; }
 
