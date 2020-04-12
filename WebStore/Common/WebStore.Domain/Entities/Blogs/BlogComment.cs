@@ -9,9 +9,8 @@ namespace WebStore.Domain.Entities.Blogs
     /// <summary>
     /// Комментарий к записи блога
     /// </summary>
-    public class BlogComment : BaseEntity, IOrderedEntity
+    public class BlogComment : BaseEntity
     {
-        public int Order { get; set; }
 
         /// <summary>
         /// Id Блога

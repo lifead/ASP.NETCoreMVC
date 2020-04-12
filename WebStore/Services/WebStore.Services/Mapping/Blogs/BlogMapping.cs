@@ -17,7 +17,6 @@ namespace WebStore.Services.Mapping.Blogs
                     BlogRatings = p.BlogRatings?.Select(x => x.ToView()).ToList() ?? new List<BlogRatingViewModel>(),
                     BlogResponses = p.BlogResponses?.Select(x => x.ToView()).ToList() ?? new List<BlogResponseViewModel>(),
                     CreateDate = p.CreateDate,
-                    Order = p.Order,
                     Text = p.Text,
                     ImageUrl = p.ImageUrl,
                     Title = p.Title,

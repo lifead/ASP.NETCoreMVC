@@ -12,7 +12,6 @@ namespace WebStore.Services.Mapping.Blogs
             BlogId = p.BlogId,
             Comment = p.Comment,
             CreateDate = p.CreateDate,
-            Order = p.Order,
             UserId = p.UserId,
             Author = p.User?.ToString() ?? "****"
             //Blog = p.Blog.ToView()

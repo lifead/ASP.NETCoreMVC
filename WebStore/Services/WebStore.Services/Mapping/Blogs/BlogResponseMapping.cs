@@ -12,7 +12,6 @@ namespace WebStore.Services.Mapping.Blogs
             CreateDate = p.CreateDate,
             UserId = p.UserId,
             BlogResponseId = p.BlogResponseId,
-            Order = p.Order,
             ResponseText = p.ResponseText,
             ImageUrl = p.ImageUrl,
             Author = p.User?.ToString() ?? "&&&&"

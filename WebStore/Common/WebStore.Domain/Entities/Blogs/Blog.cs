@@ -10,7 +10,7 @@ namespace WebStore.Domain.Entities.Blogs
     /// <summary>
     /// Блог
     /// </summary>
-    public class Blog : BaseEntity, IOrderedEntity
+    public class Blog : BaseEntity
     {
         /// <summary>
         /// Идентификатор пользователя (автора)
@@ -20,8 +20,6 @@ namespace WebStore.Domain.Entities.Blogs
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
 
-
-        public int Order { get; set; }
 
         /// <summary>
         /// Заголовок блога
