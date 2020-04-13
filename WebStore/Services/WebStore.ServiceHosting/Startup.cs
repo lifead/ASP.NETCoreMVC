@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces.Services;
@@ -39,7 +40,21 @@ namespace WebStore.ServiceHosting
             services.AddDbContext<WebStoreDB>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, Role>()
+            services.AddIdentity<User, Role>(x =>
+            {
+                x.Password.RequiredLength = 3;
+                x.Password.RequireDigit = false;
+                x.Password.RequireUppercase = false;
+                x.Password.RequireLowercase = true;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequiredUniqueChars = 3;
+
+                x.User.RequireUniqueEmail = false;
+
+                x.Lockout.AllowedForNewUsers = true;
+                x.Lockout.MaxFailedAccessAttempts = 10;
+                x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+            })
                .AddEntityFrameworkStores<WebStoreDB>()
                .AddDefaultTokenProviders();
 
