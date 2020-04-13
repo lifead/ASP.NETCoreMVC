@@ -30,33 +30,38 @@ namespace WebStore.ServiceHosting
         {
             services.AddControllers();
 
+            #region Сервисы Бизнес-логики
             services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddScoped<IBlogData, SqlBlogData>();
-            //services.AddScoped<ICartService, CookiesCartService>();
-            //services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddScoped<ICartService, CookiesCartService>(); 
+            #endregion
 
+            #region База данных
             services.AddDbContext<WebStoreDB>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+                    opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            #endregion
 
+            #region Identity
             services.AddIdentity<User, Role>(x =>
-            {
-                x.Password.RequiredLength = 3;
-                x.Password.RequireDigit = false;
-                x.Password.RequireUppercase = false;
-                x.Password.RequireLowercase = true;
-                x.Password.RequireNonAlphanumeric = false;
-                x.Password.RequiredUniqueChars = 3;
+                {
+                    x.Password.RequiredLength = 3;
+                    x.Password.RequireDigit = false;
+                    x.Password.RequireUppercase = false;
+                    x.Password.RequireLowercase = true;
+                    x.Password.RequireNonAlphanumeric = false;
+                    x.Password.RequiredUniqueChars = 3;
 
-                x.User.RequireUniqueEmail = false;
+                    x.User.RequireUniqueEmail = false;
 
-                x.Lockout.AllowedForNewUsers = true;
-                x.Lockout.MaxFailedAccessAttempts = 10;
-                x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
-            })
-               .AddEntityFrameworkStores<WebStoreDB>()
-               .AddDefaultTokenProviders();
+                    x.Lockout.AllowedForNewUsers = true;
+                    x.Lockout.MaxFailedAccessAttempts = 10;
+                    x.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+                })
+                   .AddEntityFrameworkStores<WebStoreDB>()
+                   .AddDefaultTokenProviders();
+            #endregion
 
         }
 
