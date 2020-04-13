@@ -11,6 +11,7 @@ using WebStore.DAL.Context;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces.Services;
 using WebStore.Services.Blogs.InSQL;
+using WebStore.Services.Data;
 using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InMemory;
 using WebStore.Services.Products.InSQL;
@@ -35,12 +36,13 @@ namespace WebStore.ServiceHosting
             services.AddScoped<IProductData, SqlProductData>();
             services.AddScoped<IOrderService, SqlOrderService>();
             services.AddScoped<IBlogData, SqlBlogData>();
-            //services.AddScoped<ICartService, CookiesCartService>(); 
+            services.AddScoped<ICartService, CookiesCartService>(); 
             #endregion
 
             #region База данных
             services.AddDbContext<WebStoreDB>(opt =>
                     opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<WebStoreDBInitializer>();
             #endregion
 
             #region Identity
@@ -65,8 +67,11 @@ namespace WebStore.ServiceHosting
 
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, WebStoreDBInitializer db)
         {
+            db.Initialize();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
