@@ -359,3 +359,4 @@ MigrationBackup/
 /WebStore/WebStore/wwwroot/js/site.js
 /WebStore/WebStore/wwwroot/js/site.min.js
 /WebStore/WebStore/wwwroot/js/site.min.js.gz
+/WebStore/Services/WebStore.ServiceHosting/WebStore.ServiceHosting.xml
