@@ -3,7 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using WebStore.DAL.Context;
+using WebStore.Clients.Blogs;
+using WebStore.Clients.Employees;
+using WebStore.Clients.Identity;
+using WebStore.Clients.Orders;
+using WebStore.Clients.Products;
+using WebStore.Clients.Values;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Interfaces.Api;
 using WebStore.Interfaces.Services;
@@ -12,11 +17,6 @@ using WebStore.Services.Data;
 using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InMemory;
 using WebStore.Services.Products.InSQL;
-using WebStore.Clients.Values;
-using WebStore.Clients.Employees;
-using WebStore.Clients.Products;
-using WebStore.Clients.Orders;
-using WebStore.Clients.Blogs;
 
 namespace WebStore.Services
 {
@@ -32,12 +32,25 @@ namespace WebStore.Services
         /// <returns></returns>
         public static IServiceCollection AddWebStoreInterfaces(this IServiceCollection services, IConfiguration Configuration)
         {
-            services.AddDbContext<WebStoreDB>(opt =>
-                   opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
             services.AddIdentity<User, Role>()
-               .AddEntityFrameworkStores<WebStoreDB>()
                .AddDefaultTokenProviders();
+
+            #region WebAPI Identity clients stores
+
+            services
+               .AddTransient<IUserStore<User>, UsersClient>()
+               .AddTransient<IUserPasswordStore<User>, UsersClient>()
+               .AddTransient<IUserEmailStore<User>, UsersClient>()
+               .AddTransient<IUserPhoneNumberStore<User>, UsersClient>()
+               .AddTransient<IUserTwoFactorStore<User>, UsersClient>()
+               .AddTransient<IUserLockoutStore<User>, UsersClient>()
+               .AddTransient<IUserClaimStore<User>, UsersClient>()
+               .AddTransient<IUserLoginStore<User>, UsersClient>();
+            services
+               .AddTransient<IRoleStore<Role>, RolesClient>();
+
+            #endregion
+
 
             services.Configure<IdentityOptions>(x =>
             {
@@ -76,24 +89,11 @@ namespace WebStore.Services
             //AddSingleton -   один экзеспляр на все время жизни приложения
 
             //Регистрация для работы со списком сотрудников
-            //services.AddSingleton<IEmployeesData, InMemoryEmployeesData>();
             services.AddSingleton<IEmployeesData, EmployeesClient>();
             services.AddScoped<IProductData, ProductsClient>();
             services.AddScoped<IOrderService, OrdersClient>();
             services.AddScoped<IBlogData, BlogsClient>();
-
-
-            //Регистрация для работы с перечнем секций, каталогов и фильтрами продуктов
-            //services.AddSingleton<IProductData, InMemoryProductData>();
-            //services.AddScoped<IProductData, SqlProductData>();
-            //services.AddScoped<IBlogData, SqlBlogData>();
-            services.AddScoped<ICartService, CookiesCartService>();
-            //services.AddScoped<IOrderService, SqlOrderService>();
-
             services.AddScoped<IValuesService, ValuesClient>();
-
-
-            services.AddTransient<WebStoreDBInitializer>();
 
             return services;
         }
