@@ -6,6 +6,7 @@ using WebStore.Domain.Entities.Products;
 using System.Linq;
 using WebStore.Interfaces.Services;
 using WebStore.Services.Mapping.Products;
+using AutoMapper;
 
 namespace WebStore.Areas.Admin.Controllers
 {
@@ -13,17 +14,26 @@ namespace WebStore.Areas.Admin.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductData _ProductData;
+        private readonly IMapper _Mapper;
 
-        public ProductsController(IProductData ProductData) => _ProductData = ProductData;
-
-        public IActionResult Index(/*[FromServices] IProductData Products*/)
+        public ProductsController(IProductData ProductData, [FromServices] IMapper Mapper)
         {
-            return View(_ProductData.GetProducts().Select(x=>x.FromDTO()));
+            _ProductData = ProductData;
+            _Mapper = Mapper;
+        }
+
+        public IActionResult Index()
+        {
+            return View(_ProductData
+                .GetProducts()
+                .Select(_Mapper.Map<Product>));
         }
 
         public IActionResult Edit(int? id)
         {
-            var product = id is null ? new Product() : _ProductData.GetProductById((int)id).FromDTO();
+            var product = id is null ? 
+                        new Product() :
+                        _Mapper.Map<Product>(_ProductData.GetProductById((int)id));
 
             if (product is null)
                 return NotFound();
