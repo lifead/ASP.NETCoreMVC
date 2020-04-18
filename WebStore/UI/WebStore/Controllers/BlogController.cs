@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-
+using WebStore;
+using WebStore.Controllers;
 using WebStore.Interfaces.Services;
 using WebStore.Services.Mapping.Blogs;
 
-namespace WebStore.Controlers
+namespace WebStore.Controllers
 {
     public class BlogController : Controller
     {

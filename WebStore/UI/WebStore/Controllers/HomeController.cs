@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using WebStore;
+using WebStore.Controllers;
 using WebStore.Services;
 
-namespace WebStore.Controlers
+namespace WebStore.Controllers
 {
     public class HomeController : Controller
     {
