@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using WebStore;
 using WebStore.Clients.Blogs;
 using WebStore.Clients.Employees;
 using WebStore.Clients.Identity;
@@ -10,15 +12,18 @@ using WebStore.Clients.Orders;
 using WebStore.Clients.Products;
 using WebStore.Clients.Values;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Infrastructure;
+using WebStore.Infrastructure.AutoMapper;
 using WebStore.Interfaces.Api;
 using WebStore.Interfaces.Services;
+using WebStore.Services;
 using WebStore.Services.Blogs.InSQL;
 using WebStore.Services.Data;
 using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InMemory;
 using WebStore.Services.Products.InSQL;
 
-namespace WebStore.Services
+namespace WebStore.Infrastructure
 {
     /// <summary>
     /// Класс расширения для регистрации интерфейсов данного приложения
@@ -32,6 +37,12 @@ namespace WebStore.Services
         /// <returns></returns>
         public static IServiceCollection AddWebStoreInterfaces(this IServiceCollection services, IConfiguration Configuration)
         {
+            services.AddAutoMapper(x => 
+            {
+                x.AddProfile<DTOMapping>();
+                x.AddProfile<ViewModelMapping>();
+            }, typeof(Startup));
+
             services.AddIdentity<User, Role>()
                .AddDefaultTokenProviders();
 

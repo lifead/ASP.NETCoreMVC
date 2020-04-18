@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,13 @@ namespace WebStore.Components
     {
 
         private readonly IProductData _ProductData;
+        private readonly IMapper _Mapper;
 
-        public BrandsViewComponent(IProductData ProductData) => _ProductData = ProductData;
+        public BrandsViewComponent(IProductData ProductData, [FromServices] IMapper Mapper)
+        {
+            _ProductData = ProductData;
+            _Mapper = Mapper;
+        }
 
         public IViewComponentResult Invoke() => View(GetBrands());
 
@@ -28,8 +34,7 @@ namespace WebStore.Components
         /// <returns>Перечень </returns>
         public IEnumerable<BrandViewModel> GetBrands() => _ProductData
            .GetBrands()
-
-           .Select(brand => ExampleMapping.Mapp<BrandViewModel>(brand))
+           .Select(brand => _Mapper.Map<BrandViewModel>(brand))
            .OrderBy(brand => brand.Order);
     }
 }

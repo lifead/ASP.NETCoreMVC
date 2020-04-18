@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebStore.Domain.Entities.Identity;
+using WebStore.Infrastructure;
 using WebStore.Services;
 using WebStore.Services.Data;
 
