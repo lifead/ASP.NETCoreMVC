@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure;
+using WebStore.Infrastructure.Middleware;
 using WebStore.Logger.Log4Net;
 using WebStore.Services;
 using WebStore.Services.Data;
@@ -47,6 +48,8 @@ namespace WebStore
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlingMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
