@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
+using WebStore;
+using WebStore.Controllers;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Domain.Models;
 using WebStore.Domain.ViewModels.Product;
@@ -10,7 +12,7 @@ using WebStore.Services;
 
 
 
-namespace WebStore.Controlers
+namespace WebStore.Controllers
 {
     [Authorize]
     public class EmployeesController : Controller

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebStore;
+using WebStore.Controllers;
 using WebStore.Interfaces.Api;
 
-namespace WebStore.Controlers
+namespace WebStore.Controllers
 {
     public class WebAPITestController : Controller
     {
