@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using WebStore.Controllers;
 
 using Assert = Xunit.Assert;
@@ -35,5 +36,46 @@ namespace WebStore.Tests.Controllers
 
             Assert.IsType<ViewResult>(result);
         }
+
+        //[TestMethod, ExpectedException(typeof(ApplicationException))]
+        //public void Throw_Throw_ApplicationException()
+        //{
+        //    var controller = new HomeController();
+        //    const string expected_exception_text = "123";
+        //    var result = controller.Throw(expected_exception_text);
+        //    Assert.IsType<ViewResult>(result);
+        //}
+
+        [TestMethod]
+        public void Throw_Throw_ApplicationException()
+        {
+            var controller = new HomeController();
+            const string expected_exception_text = "123";
+            var exception = Assert.Throws<ApplicationException>(() => controller.Throw(expected_exception_text));
+            Assert.Equal(expected_exception_text, exception.Message);
+        }
+
+        [TestMethod]
+        public void Error404_Returns_View()
+        {
+            var controller = new HomeController();
+
+            var result = controller.Error404();
+
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [TestMethod]
+        public void ErrorStatus_404_RedirectTo_Error404()
+        {
+            var controller = new HomeController();
+
+            const string status_code = "404";
+
+            var result = controller.ErrorStatus(status_code);
+
+            Assert.NotNull(result);
+        }
+
     }
 }
