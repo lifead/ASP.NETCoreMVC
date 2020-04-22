@@ -19,6 +19,7 @@ using WebStore.Interfaces.Services;
 using WebStore.Services;
 using WebStore.Services.Blogs.InSQL;
 using WebStore.Services.Data;
+using WebStore.Services.Products;
 using WebStore.Services.Products.InCookies;
 using WebStore.Services.Products.InMemory;
 using WebStore.Services.Products.InSQL;
@@ -105,6 +106,9 @@ namespace WebStore.Infrastructure
             services.AddScoped<IOrderService, OrdersClient>();
             services.AddScoped<IBlogData, BlogsClient>();
             services.AddScoped<IValuesService, ValuesClient>();
+
+            services.AddScoped<ICartStore, CookiesCartStore>();
+            services.AddScoped<ICartService, CartService>();
 
             return services;
         }
