@@ -86,7 +86,8 @@ namespace WebStore.Services.Tests.Products
             Assert.Equal(expected_count, actual_count);
         }
 
-        [TestMethod]
+        [TestMethod, Timeout(1200)]
+
         public void CartViewModel_Returns_Correct_ItemsCount()
         {
             const int expected_count = 4;
