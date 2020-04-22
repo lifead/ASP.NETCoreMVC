@@ -68,7 +68,7 @@ namespace WebStore.Services.Tests.Products
             _CartService = new CartService(_ProductDataMock.Object, _CartStoreMock.Object);
         }
 
-        [TestMethod]
+        [TestMethod/*, Ignore, Description(""), Timeout(200)*/]
         public void Cart_Class_ItemsCount_returns_Correct_Quantity()
         {
             const int expected_count = 4;
