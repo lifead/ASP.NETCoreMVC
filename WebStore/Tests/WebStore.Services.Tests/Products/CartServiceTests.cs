@@ -1,18 +1,13 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using WebStore.Domain.DTO.Products;
-using WebStore.Domain.Entities;
 using WebStore.Domain.Entities.Products;
 using WebStore.Domain.Models;
-using WebStore.Domain.ViewModels;
 using WebStore.Domain.ViewModels.Product;
 using WebStore.Interfaces.Services;
 using WebStore.Services.Products;
-using WebStore.Services.Products.InCookies;
 using Assert = Xunit.Assert;
 
 namespace WebStore.Services.Tests.Products
