@@ -1,40 +1,33 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using WebStore.Domain.ViewModels;
 using WebStore.Domain.ViewModels.Product;
 using WebStore.Interfaces.Services;
-using WebStore.Services;
-
 
 namespace WebStore.Components
 {
-    /// <summary>
-    /// Визуальный компонент для отображения перечня брэндов
-    /// </summary>
     public class BrandsViewComponent : ViewComponent
     {
-
         private readonly IProductData _ProductData;
-        private readonly IMapper _Mapper;
 
-        public BrandsViewComponent(IProductData ProductData, [FromServices] IMapper Mapper)
-        {
-            _ProductData = ProductData;
-            _Mapper = Mapper;
-        }
+        public BrandsViewComponent(IProductData ProductData) => _ProductData = ProductData;
 
-        public IViewComponentResult Invoke() => View(GetBrands());
+        public IViewComponentResult Invoke(string BrandId) =>
+            View(new BrandCompleteViewModel
+            {
+                Brands = GetBrands(),
+                CurrentBrandId = int.TryParse(BrandId, out var id) ? id : (int?)null
+            });
 
-        /// <summary>
-        /// Получить все бренды
-        /// </summary>
-        /// <returns>Перечень </returns>
         public IEnumerable<BrandViewModel> GetBrands() => _ProductData
            .GetBrands()
-           .Select(brand => _Mapper.Map<BrandViewModel>(brand))
+           .Select(brand => new BrandViewModel
+           {
+               Id = brand.Id,
+               Name = brand.Name,
+               Order = brand.Order
+           })
            .OrderBy(brand => brand.Order);
     }
 }
