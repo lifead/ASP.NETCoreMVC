@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using WebStore.Domain.ViewModels.Product;
 
-namespace WebStore.Domain.ViewModels
+namespace WebStore.Domain.ViewModels.Product
 {
     public class BrandCompleteViewModel
     {

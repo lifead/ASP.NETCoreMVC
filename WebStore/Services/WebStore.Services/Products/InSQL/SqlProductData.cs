@@ -5,6 +5,7 @@ using WebStore.DAL.Context;
 using WebStore.Domain.DTO.Products;
 using WebStore.Domain.Entities.Products;
 using WebStore.Interfaces.Services;
+using WebStore.Services.Mapping;
 using WebStore.Services.Mapping.Products;
 
 namespace WebStore.Services.Products.InSQL
@@ -42,6 +43,10 @@ namespace WebStore.Services.Products.InSQL
                  //.Include(x => x.Products)
                  .AsEnumerable();
         }
+
+        public SectionDTO GetSectionById(int id) => _db.Sections.FirstOrDefault(s => s.Id == id).ToDTO();
+
+        public BrandDTO GetBrandById(int id) => _db.Brands.Find(id).ToDTO();
 
         public ProductDTO GetProductById(int id)
         {

@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using WebStore.Domain.ViewModels;
 using WebStore.Domain.ViewModels.Product;
 using WebStore.Interfaces.Services;
 
 namespace WebStore.Components
 {
-    /// <summary>
-    /// Визуальный компонент для отображения перечня секций
-    /// </summary>
     public class SectionsViewComponent : ViewComponent
     {
         private readonly IProductData _ProductData;
+
         public SectionsViewComponent(IProductData ProductData) => _ProductData = ProductData;
 
         public IViewComponentResult Invoke(string SectionId)
@@ -30,11 +27,6 @@ namespace WebStore.Components
             });
         }
 
-
-        /// <summary>
-        /// Получить все секции
-        /// </summary>
-        /// <returns>Перечень секций</returns>
         private IEnumerable<SectionViewModel> GetSections(int? SectionId, out int? ParentSectionId)
         {
             ParentSectionId = null;
@@ -78,4 +70,3 @@ namespace WebStore.Components
         }
     }
 }
-
