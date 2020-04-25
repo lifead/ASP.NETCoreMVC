@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebStore.Domain.ViewModels;
 using WebStore.Domain.ViewModels.Product;
 using WebStore.Interfaces.Services;
 using WebStore.Services;
@@ -26,7 +27,12 @@ namespace WebStore.Components
             _Mapper = Mapper;
         }
 
-        public IViewComponentResult Invoke() => View(GetBrands());
+        public IViewComponentResult Invoke(string BrandId) =>
+            View(new BrandCompleteViewModel
+            {
+                Brands = GetBrands(),
+                CurrentBrandId = int.TryParse(BrandId, out var id) ? id : (int?)null
+            });
 
         /// <summary>
         /// Получить все бренды
