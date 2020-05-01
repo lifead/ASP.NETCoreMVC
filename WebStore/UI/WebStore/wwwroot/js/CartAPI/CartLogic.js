@@ -6,7 +6,7 @@
     init: function (properties) {
         $.extend(Cart._properties, properties);
 
-        $(".add-to-cart").click(addToCart);
+        $(".add-to-cart").click(Cart.addToCart);
     },
     addToCart: function (event) {
         event.preventDefault();
@@ -14,7 +14,8 @@
         let button = $(this);
         const id = button.data('id'); // data-id="..."
 
-        $.get(Cart._properties.addToCart + '/' + id)
+        console.log(`${Cart._properties.addToCartLink}/${id}`)
+        $.get(url)
             .done(function () {
                 Cart.showToolTip(button);
                 Cart.refreshCartView();
@@ -28,7 +29,7 @@
         }, 500);
     },
     refreshCartView: function () {
-        let container = $('#catr-container');
+        let container = $('#cart-container');
         $.get(Cart._properties.getCartViewLink)
             .done(function (cartHtml) {
                 container.html(cartHtml);
