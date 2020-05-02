@@ -9,13 +9,11 @@ using WebStore.Interfaces.Services;
 
 namespace WebStore.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CartApiController : Controller
+    public class CartAPIController : Controller
     {
         private readonly ICartService _CartService;
 
-        public CartApiController(ICartService CartService)
+        public CartAPIController(ICartService CartService)
         {
             _CartService = CartService;
         }

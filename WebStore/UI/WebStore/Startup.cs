@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using WebStore.Domain.Entities.Identity;
 using WebStore.Infrastructure;
 using WebStore.Infrastructure.Middleware;
@@ -23,8 +24,6 @@ namespace WebStore
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             //Добавление и регистрация сервисов данного приложения

@@ -22,12 +22,9 @@ namespace WebStore.Areas.Admin.Controllers
             _Mapper = Mapper;
         }
 
-        public IActionResult Index()
-        {
-            return View(_ProductData
-                .GetProducts()
-                .Select(_Mapper.Map<Product>));
-        }
+        public IActionResult Index([FromServices] IMapper Mapper) =>
+           View(_ProductData.GetProducts().Products.Select(Mapper.Map<Product>));
+
 
         public IActionResult Edit(int? id)
         {
