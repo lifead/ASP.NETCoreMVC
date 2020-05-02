@@ -37,29 +37,32 @@ namespace WebStore.Services.Tests.Products
             _ProductDataMock = new Mock<IProductData>();
             _ProductDataMock
                .Setup(c => c.GetProducts(It.IsAny<ProductFilter>()))
-               .Returns(new List<ProductDTO>
-                {
-                    new ProductDTO
+               .Returns(new PagedProductsDTO
+               {
+                   Products = new List<ProductDTO>
                     {
-                        Id = 1,
-                        Name = "Product 1",
-                        Price = 1.1m,
-                        Order = 0,
-                        ImageUrl = "Product1.png",
-                        Brand = new BrandDTO { Id = 1, Name = "Brand 1" },
-                        Section = new SectionDTO { Id = 1, Name = "Section 1"}
-                    },
-                    new ProductDTO
-                    {
-                        Id = 2,
-                        Name = "Product 2",
-                        Price = 2.2m,
-                        Order = 0,
-                        ImageUrl = "Product2.png",
-                        Brand = new BrandDTO { Id = 2, Name = "Brand 2" },
-                        Section = new SectionDTO { Id = 2, Name = "Section 2"}
-                    },
-                });
+                        new ProductDTO
+                        {
+                            Id = 1,
+                            Name = "Product 1",
+                            Price = 1.1m,
+                            Order = 0,
+                            ImageUrl = "Product1.png",
+                            Brand = new BrandDTO { Id = 1, Name = "Brand 1" },
+                            Section = new SectionDTO { Id = 1, Name = "Section 1"}
+                        },
+                        new ProductDTO
+                        {
+                            Id = 2,
+                            Name = "Product 2",
+                            Price = 2.2m,
+                            Order = 0,
+                            ImageUrl = "Product2.png",
+                            Brand = new BrandDTO { Id = 2, Name = "Brand 2" },
+                            Section = new SectionDTO { Id = 2, Name = "Section 2"}
+                        },
+                    }
+               });
 
             _CartStoreMock = new Mock<ICartStore>();
             _CartStoreMock.Setup(c => c.Cart).Returns(_Cart);
@@ -68,7 +71,7 @@ namespace WebStore.Services.Tests.Products
             _CartService = new CartService(_ProductDataMock.Object, _CartStoreMock.Object);
         }
 
-        [TestMethod/*, Ignore, Description(""), Timeout(200)*/]
+        [TestMethod]
         public void Cart_Class_ItemsCount_returns_Correct_Quantity()
         {
             const int expected_count = 4;
@@ -86,8 +89,7 @@ namespace WebStore.Services.Tests.Products
             Assert.Equal(expected_count, actual_count);
         }
 
-        [TestMethod, Timeout(1200)]
-
+        [TestMethod]
         public void CartViewModel_Returns_Correct_ItemsCount()
         {
             const int expected_count = 4;
@@ -153,7 +155,7 @@ namespace WebStore.Services.Tests.Products
             Assert.Equal(2, _Cart.Items[1].Quantity);
         }
 
-        [TestMethod]
+        [TestMethod/*, Ignore, Description(""), Timeout(200)*/]
         public void CartService_Remove_Item_When_Decrement_to_0()
         {
             const int item_id = 1;

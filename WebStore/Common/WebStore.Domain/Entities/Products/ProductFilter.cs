@@ -23,5 +23,14 @@ namespace WebStore.Domain.Entities.Products
         /// </summary>
         public List<int> Ids { get; set; }
 
+        /// <summary>
+        /// Номер страницы
+        /// </summary>
+        public int Page { get; set; }
+
+        /// <summary>
+        /// Общее количество страниц
+        /// </summary>
+        public int? PageSize { get; set; }
     }
 }
