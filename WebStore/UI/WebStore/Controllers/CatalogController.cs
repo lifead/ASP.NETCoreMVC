@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using WebStore.Domain.DTO.Products;
@@ -65,13 +66,14 @@ namespace WebStore.Controllers
 
         #region API
 
-        public IActionResult GetFiltredItems(int? SectionId, int? BrandId, int Page)
+        public IActionResult GetFilteredItems(int? SectionId, int? BrandId, int Page)
         {
             var products =
                 GetProducts(SectionId, BrandId, Page)
                    .Select(ProductMapping.FromDTO)
                    .Select(ProductMapping.ToView)
                    .OrderBy(p => p.Order);
+            Thread.Sleep(700);
             return PartialView("Partial/_FeaturesItems", products);
         }
 
