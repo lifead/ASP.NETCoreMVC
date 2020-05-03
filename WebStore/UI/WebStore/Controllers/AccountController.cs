@@ -106,5 +106,13 @@ namespace WebStore.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        public async Task<IActionResult> IsNameFree(string UserName)
+        {
+            var user = await _UserManager.FindByNameAsync(UserName);
+            if (user != null)
+                return Json("Пользователь уже существует");
+            return Json("true");
+        }
     }
 }

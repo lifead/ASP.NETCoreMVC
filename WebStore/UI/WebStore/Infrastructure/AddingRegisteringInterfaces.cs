@@ -38,6 +38,8 @@ namespace WebStore.Infrastructure
         /// <returns></returns>
         public static IServiceCollection AddWebStoreInterfaces(this IServiceCollection services, IConfiguration Configuration)
         {
+            services.AddSignalR();
+
             services.AddAutoMapper(x => 
             {
                 x.AddProfile<DTOMapping>();
